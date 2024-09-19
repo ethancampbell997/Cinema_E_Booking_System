@@ -1,0 +1,31 @@
+.movie-list {
+    padding: 20px;
+    background-color: #222;
+    color: white;
+}
+  
+.movie-cards {
+    display: flex;
+    justify-content: space-between;
+}
+  
+.movie-card {
+    width: 150px;
+    text-align: center;
+}
+  
+.movie-card img {
+    width: 100%;
+}
+  
+.watch-trailer {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #80B9F9;
+    border: none;
+    cursor: pointer;
+}
+
+.movie-card p {
+    color: #FFC685;
+}
