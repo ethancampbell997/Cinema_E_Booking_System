@@ -14,7 +14,7 @@ const MovieList = ({ title, movies = [] }) => {
           <div className="movie-card" key={index}>
             <img src={movie.poster} alt={movie.title} />
             <h3>{movie.title}</h3>
-            <p>{movie.rating} ⭐</p>
+            <p>{movie.rating}</p>
             <button className="watch-trailer" onClick={() => handleWatchTrailer(movie.trailer)}>
               Watch Trailer
             </button>
