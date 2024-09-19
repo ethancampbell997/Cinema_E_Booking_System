@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import MovieList from './components/MovieList';
+import Footer from './components/Footer';
 
 import Deadpool from './images/165188.png'
 
@@ -16,6 +17,7 @@ function App() {
       <Navbar />
       <HeroSection />
       <MovieList title="Now Playing" movies={moviesNowPlaying} />
+      <Footer />
     </div>
   );
 }

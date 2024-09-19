@@ -1,12 +1,19 @@
 .navbar {
+    position: relative;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: #333;
     padding: 15px 30px;
     color: white;
+    flex-wrap: wrap;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .logo {
+    position: absolute;
+    top: 22px;
     color: #FFC685;
     font-weight: bold;
     font-size: 32px;
@@ -15,10 +22,37 @@
 .nav-links {
     list-style: none;
     display: flex;
+    gap: 30px;
+    margin-left: 200px;
+    padding: 0;
 }
   
 .navbar li {
-    margin-left: 20px;
+    display: inline;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 15px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: #ff9900;
+}
+
+.nav-links a.active::after {
+    content: "";
+    position: absolute;
+    left: 10%;
+    bottom: 3px;
+    width: 80%;
+    height: 3px;
+    background-color: #FFC685;
 }
 
 .nav-right {
@@ -35,6 +69,7 @@
     margin-left: 10px;
     padding: 5px 10px;
     background-color: #FFC685;
+    color: white;
     border: none;
     cursor: pointer;
 }
