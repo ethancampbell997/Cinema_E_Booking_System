@@ -1,6 +1,6 @@
 .hero-section {
-    background: url('../images/br2049.jpg') center center / cover no-repeat;
-    height: 600px;
+    background: url('../images/br2049.png') center center / cover no-repeat;
+    height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
