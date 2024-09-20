@@ -1,19 +1,21 @@
 .navbar {
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
     padding: 15px 30px;
     color: white;
     flex-wrap: wrap;
     max-width: 100%;
+    width: 100%;
     overflow-x: hidden;
+    background: linear-gradient(to bottom, rgb(15, 15, 15), rgba(0, 0, 0, 0));
+    z-index: 10;
 }
 
 .logo {
     position: absolute;
-    top: 22px;
+    top: 25px;
     color: #FFC685;
     font-weight: bold;
     font-size: 32px;
@@ -25,6 +27,7 @@
     gap: 30px;
     margin-left: 200px;
     padding: 0;
+    font-size: 18px;
 }
   
 .navbar li {
@@ -58,18 +61,45 @@
 .nav-right {
     display: flex;
     align-items: center;
+    margin-right: 35px;
 }
 
 .search-bar {
     padding: 5px;
-    margin-right: 20px;
+    margin-right: 15px;
+    font-size: 17px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(243, 243, 243, 0.5);
+    border-radius: 10px;
+    color: white;
 }
   
-.sign-in, .sign-up {
-    margin-left: 10px;
+.sign-in {
+    margin-right: 10px;
     padding: 5px 10px;
-    background-color: #FFC685;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
     color: white;
-    border: none;
     cursor: pointer;
+}
+
+.sign-up {
+    margin-right: 10px;
+    padding: 4px 10px;
+    font-size: 18px;
+    background-color: #FFC685;
+    border: 1px solid;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.sign-in:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.sign-up:hover {
+    background-color: #ffb340;
 }
