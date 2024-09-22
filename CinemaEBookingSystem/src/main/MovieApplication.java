@@ -1,4 +1,4 @@
-package movieSearchTitle;
+package main;
 
 public class MovieApplication {
 
