@@ -14,7 +14,10 @@ const MovieList = ({ title, movies = [] }) => {
         {movies.map((movie, index) => (
           <div className="movie-card" key={index}>
             <Link to={`/movie/${movie.id}`} style={{ textDecoration: 'none' }}>
-              <img src={movie.poster} alt={movie.title} />
+              <div className="poster-container">
+                <img src={movie.poster} alt={movie.title} className="movie-poster" />
+                <div className="highlight-overlay"></div>
+              </div>
             </Link>
 
             <Link to={`/movie/${movie.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>

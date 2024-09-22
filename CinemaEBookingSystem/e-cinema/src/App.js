@@ -1,23 +1,27 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import MovieList from './components/MovieList';
 import MovieDetail from './components/MovieDetail';
 import Footer from './components/Footer';
+import Admin from './components/Admin';
+import AdminMovies from './components/AdminMovies';
+import AdminPromotions from './components/AdminPromotions';
 
-import Deadpool from './images/Deadpool.png';
-import Transformers from './images/Transformers.png';
-import Beetlejuice from './images/Beetlejuice.png';
-import SpeakNoEvil from './images/Speak-No-Evil.png';
-import Twisters from './images/Twisters.png';
+import Deadpool from './images/posters/Deadpool.png';
+import Transformers from './images/posters/Transformers.png';
+import Beetlejuice from './images/posters/Beetlejuice.png';
+import SpeakNoEvil from './images/posters/Speak-No-Evil.png';
+import Twisters from './images/posters/Twisters.png';
 
-import Wicked from './images/Wicked.png';
-import CapAm from './images/Captain-America.png';
-import Sonic from './images/Sonic.png';
-import Gladiator from './images/Gladiator.png';
-import Mickey from './images/Mickey-17.png';
+import Wicked from './images/posters/Wicked.png';
+import CapAm from './images/posters/Captain-America.png';
+import Sonic from './images/posters/Sonic.png';
+import Gladiator from './images/posters/Gladiator.png';
+import Mickey from './images/posters/Mickey-17.png';
 
 const moviesNowPlaying = [
   { id: 'deadpool-and-wolverine', title: 'Deadpool & Wolverine', rating: '4⭐', poster: Deadpool, trailer: 'https://www.youtube.com/watch?v=73_1biulkYk' },
@@ -35,12 +39,26 @@ const moviesComingSoon = [
   { id: 'mickey-17', title: 'Mickey 17', poster: Mickey, trailer: 'https://www.youtube.com/watch?v=osYpGSz_0i4' },
 ];
 
+const moviesNowPlayingWithStatus = moviesNowPlaying.map(movie => ({
+  ...movie,
+  status: 'Now Playing'
+}));
+
+const moviesComingSoonWithStatus = moviesComingSoon.map(movie => ({
+  ...movie,
+  status: 'Coming Soon'
+}));
+
+export const allMoviesWithStatus = [...moviesNowPlayingWithStatus, ...moviesComingSoonWithStatus];
 const allMovies = [...moviesNowPlaying, ...moviesComingSoon];
 
 function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
   return (
     <div className="App">
-            <Navbar />
+            {!isAdminRoute && <Navbar />}
             <Routes>
                 <Route path="/" element={
                   <><HeroSection />
@@ -49,8 +67,13 @@ function App() {
                   </>
                 } />
                 <Route path="/movie/:id" element={<MovieDetail movies={allMovies} />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/movies" element={<AdminMovies />} />
+                <Route path="/admin/users" element={<Admin />} />
+                <Route path="/admin/pricing" element={<Admin />} />
+                <Route path="/admin/promotions" element={<AdminPromotions />} />
             </Routes>
-            <Footer />
+            {!isAdminRoute && <Footer />}
     </div>
   );
 }
