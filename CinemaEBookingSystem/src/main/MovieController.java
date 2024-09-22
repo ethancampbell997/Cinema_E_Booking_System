@@ -1,5 +1,9 @@
 package main;
 
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/movies")
 public class MovieController {
 
 	public List<Movie> movieDB = new ArrayList<>();
