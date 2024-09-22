@@ -1,0 +1,59 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+body {
+  background: #333;
+  color: hsl(200, 100%, 90%);
+  max-width: 1200px;
+  padding: 1rem;
+  margin: 0 auto;
+}
+.reqqq{
+  color: red;
+}
+h3{
+  color: rgb(255, 198, 133);
+  font-size: 24px;
+}
+.links{
+  padding-top: 31px;
+  display: flex;
+  gap: 16px;
+  font-weight: 18px;
+  font-size: 16px;
+}
+#header{
+  display: flex;
+  justify-content: space-between;
+}
+.linkk{
+  text-decoration: none;
+  color: rgb(55, 198, 233);
+}
+.linkk:visited{
+  color: rgb(55, 198, 233);
+}
+.linkk:hover{
+  text-decoration: underline;
+  text-decoration: color(rgb(55, 198, 233));
+}
+.FinishButton, button{
+  border-radius: 10px;
+  font-size: 20px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+.FinishButton:hover, button:hover{
+  background-color: rgb(55, 198, 233);
+}
+.rows{
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid rgb(255, 198, 133);
+  border-radius: 10px;
+}
+.col{
+  display: flex;
+  flex-direction: column;;
+}
