@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 
 public class MovieAccess {
     
-    public int exists(String title) {
+    public int getID(String title) {
         String sql = "select movie_id from movies where title=" + title;
         String url = "jdbc:mysql://localhost:3306/cinema_booking_db";
         String username = "root";
@@ -20,25 +20,27 @@ public class MovieAccess {
         try {
             Connection con = DriverManager.getConnection(url, username, password);
             if (con == null) {
-                return 2;
+                return -1;
             } // if
 
             st = con.createStatement();
             if (st == null) {
-                return 3;
+                return -1;
             } // if
 
             rs = st.executeQuery(sql);
             if (rs.next()) {
-                return 1; // Movie exists
+                /* Movie exists */
+                int i = rs.getInt(1);
+                return i;
             } // if
 
         } catch (SQLException e) {
-            return 4;
+            return -1;
         } // try
         
         return 0; // Movie does not exist
-    }
+    } // getID
     
     public String getStatus(String title) {
         /* Pre: Movie exists */
