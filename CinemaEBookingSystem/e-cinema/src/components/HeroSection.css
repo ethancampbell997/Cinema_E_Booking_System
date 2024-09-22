@@ -1,0 +1,29 @@
+.hero-section {
+    background: url('../images/br2049.png') center center / cover no-repeat;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+  
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.hero-section button {
+    padding: 8px 16px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #00DDD3;
+    border: 1px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 2% 0 7% 0;
+    color: white;
+}
+
+.hero-section button:hover {
+    background-color: #00b8c5;
+}
