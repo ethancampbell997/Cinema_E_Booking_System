@@ -1,3 +1,5 @@
+package main;
+
 public class MovieAccess {
     
     public boolean exists(String title) {
