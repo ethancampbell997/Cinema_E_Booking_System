@@ -11,8 +11,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.5</version> <!-- Use the latest version of Spring Boot -->
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>3.0.5</version>
+        <relativePath/>
     </parent>
 
     <dependencies>
@@ -20,28 +20,28 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.0.5</version> <!-- Add version for spring-boot-starter-web -->
+            <version>3.0.5</version>
         </dependency>
 
         <!-- MySQL Connector -->
         <dependency>
             <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.32</version> <!-- Add version for MySQL connector -->
+            <artifactId>mysql-connector-java</artifactId> <!-- Correct artifactId -->
+            <version>8.0.32</version>
         </dependency>
 
         <!-- Spring Boot JPA for ORM -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>3.0.5</version> <!-- Add version for JPA -->
+            <version>3.0.5</version>
         </dependency>
 
         <!-- Spring Boot Starter Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>3.0.5</version> <!-- Add version for testing -->
+            <version>3.0.5</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -54,7 +54,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>3.0.5</version>
                 <configuration>
-                    <!-- Specify the main class that contains the main method -->
                     <mainClass>com.yourgroup.cinemaebooking.CinemaEBookingApplication</mainClass>
                 </configuration>
             </plugin>
