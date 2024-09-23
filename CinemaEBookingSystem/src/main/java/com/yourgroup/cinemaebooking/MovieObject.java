@@ -9,7 +9,7 @@ public class MovieObject {
 
     public MovieObject(String t) {
         M = new MovieAccess();
-        int id = M.getID(t);
+        id = M.getID(t);
         if (id == -1) {
             /* Error when querying database */
             title = "ERR";
