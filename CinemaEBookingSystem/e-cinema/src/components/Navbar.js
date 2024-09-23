@@ -24,8 +24,8 @@ const Navbar = () => {
             </ul>
             <div className="nav-right">
                 <input type="text" placeholder="Search" className="search-bar" />
-                <button className="sign-in"><Link className="linkk"to="/login">Sign In</Link></button>
-                <button className="sign-up"><Link className="linkk "to="/createaccount">Sign Up</Link></button>
+                <button className="sign-in"><Link to="/login">Sign In</Link></button>
+                <button className="sign-up"><Link to="/createaccount">Sign Up</Link></button>
             </div>
         </nav>
     );
