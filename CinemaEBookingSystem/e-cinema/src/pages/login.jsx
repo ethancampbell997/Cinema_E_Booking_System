@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar"
 export function LogIn() {
     return <>
     <Navbar />
-    <h1>Log in</h1>
+    <h1 className="below">Log in</h1>
     <span>New User? Sign up </span>
     <Link className="linkk "to="/createaccount">here!</Link>
     <form method="POST">

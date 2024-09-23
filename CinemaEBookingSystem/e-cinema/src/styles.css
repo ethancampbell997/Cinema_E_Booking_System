@@ -1,6 +1,7 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
+  color: white;
 }
 /*body {
   background: #333;
@@ -56,4 +57,7 @@ h3{
 .col{
   display: flex;
   flex-direction: column;;
+}
+.below{
+  padding-top: 100px;
 }
