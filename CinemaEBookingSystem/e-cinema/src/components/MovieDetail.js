@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import './HeroSection.css';
+import { Link } from "react-router-dom"
 
 import Deadpool from '../images/banners/Deadpool-Wolverine.png';
 import Transformers from '../images/banners/Transformers.png';
@@ -44,7 +45,7 @@ const MovieDetail = ({ movies }) => {
             <div className="hero-content">
               <h1>{movie.title}</h1>
               <div className="buttons">
-                <button>Get Tickets</button>
+                <button><Link className="linkk"to="/book">Get Tickets</Link></button>
                 <button className="watch-trailer" onClick={() => handleWatchTrailer(movie.trailer)}>
                   Watch Trailer
                 </button>
