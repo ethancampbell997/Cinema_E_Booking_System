@@ -1,5 +1,6 @@
 com\yourgroup\cinemaebooking\MovieAccess.class
 com\yourgroup\cinemaebooking\MovieObject.class
+com\yourgroup\cinemaebooking\MovieController.class
 com\yourgroup\cinemaebooking\CinemaEBookingApplication.class
 com\yourgroup\cinemaebooking\db\DBTester.class
 com\yourgroup\cinemaebooking\db\DatabaseConnectionTest.class
