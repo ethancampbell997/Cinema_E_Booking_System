@@ -39,7 +39,7 @@ h3{
   text-decoration: underline;
   text-decoration: color(rgb(55, 198, 233));
 }
-.FinishButton, button{
+.FinishButton {
   border-radius: 10px;
   font-size: 20px;
   padding-left: 6px;
