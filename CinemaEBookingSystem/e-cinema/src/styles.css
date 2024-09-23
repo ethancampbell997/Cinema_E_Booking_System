@@ -1,14 +1,15 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
+  color: white;
 }
-body {
+/*body {
   background: #333;
   color: hsl(200, 100%, 90%);
   max-width: 1200px;
   padding: 1rem;
   margin: 0 auto;
-}
+}*/
 .reqqq{
   color: red;
 }
@@ -38,7 +39,7 @@ h3{
   text-decoration: underline;
   text-decoration: color(rgb(55, 198, 233));
 }
-.FinishButton, button{
+.FinishButton button{
   border-radius: 10px;
   font-size: 20px;
   padding-left: 6px;
@@ -56,4 +57,7 @@ h3{
 .col{
   display: flex;
   flex-direction: column;;
+}
+.below{
+  padding-top: 100px;
 }

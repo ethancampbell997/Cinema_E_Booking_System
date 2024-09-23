@@ -1,8 +1,8 @@
 import "../styles.css"
-import { MakeHeader } from "../components/MakeHeader"
+import Navbar from "../components/Navbar"
 export function Home() {
     return <>
-    <MakeHeader />
+    <Navbar />
     <h1>Homepage</h1>
     </>
 }

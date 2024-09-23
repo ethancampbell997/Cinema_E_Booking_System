@@ -1,9 +1,8 @@
 import "../styles.css"
-import { MakeHeader } from "../components/MakeHeader"
-import { Link } from "react-router-dom"
+import Navbar from "../components/Navbar"
 export function EditProf() {
     return <>
-    <MakeHeader />
+    <Navbar />
     <h1>Edit Profile</h1>
     <form method="POST">
     <label for="name">Name: </label>

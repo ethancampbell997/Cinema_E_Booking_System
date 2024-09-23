@@ -1,10 +1,10 @@
 import "../styles.css"
-import { MakeHeader } from "../components/MakeHeader"
+import Navbar from "../components/Navbar"
 import { Link } from "react-router-dom"
 export function CreateAccount() {
     return <>
-    <MakeHeader />
-    <h1>Create Account</h1>
+    <Navbar />
+    <h1 className="below">Create Account</h1>
     <span>Already have an account? Log in </span>
     <Link className="linkk "to="/login">here</Link>
     <form method="POST">

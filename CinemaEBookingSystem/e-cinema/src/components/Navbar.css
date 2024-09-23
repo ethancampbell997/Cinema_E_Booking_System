@@ -65,7 +65,6 @@
 .nav-right {
     display: flex;
     align-items: center;
-    margin-right: 35px;
 }
 
 .search-bar {
@@ -81,23 +80,31 @@
 .sign-in {
     margin-right: 10px;
     padding: 5px 10px;
-    font-size: 18px;
     background-color: rgba(0, 0, 0, 0.1);
     border-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    color: white;
     cursor: pointer;
 }
 
 .sign-up {
     margin-right: 10px;
     padding: 4px 10px;
-    font-size: 18px;
     background-color: #FFC685;
     border: 1px solid;
     border-radius: 10px;
-    color: white;
     cursor: pointer;
+}
+
+.sign-in a{
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.sign-up a{
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
 }
 
 .sign-in:hover {

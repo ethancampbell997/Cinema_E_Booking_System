@@ -23,6 +23,17 @@ import Sonic from './images/posters/Sonic.png';
 import Gladiator from './images/posters/Gladiator.png';
 import Mickey from './images/posters/Mickey-17.png';
 
+import "./styles.css"
+import { Home } from "./pages/home";
+import { CreateAccount } from "./pages/createaccount";
+import { LogIn } from "./pages/login";
+import { RegistrationConfirmation } from "./pages/regcon";
+import { EditProf } from "./pages/editprof";
+import { Book } from "./pages/book";
+import { OrderSummary } from "./pages/ordersummary";
+import { Checkout } from "./pages/checkout";
+import { OrderConfirmation } from "./pages/ordercon";
+
 const moviesNowPlaying = [
   { id: 'deadpool-and-wolverine', title: 'Deadpool & Wolverine', rating: '4⭐', poster: Deadpool, trailer: 'https://www.youtube.com/watch?v=73_1biulkYk' },
   { id: 'transformers-one', title: 'Transformers One', rating: '4⭐', poster: Transformers, trailer: 'https://www.youtube.com/watch?v=u2NuUWuwPCM' },
@@ -67,6 +78,15 @@ function App() {
                   </>
                 } />
                 <Route path="/movie/:id" element={<MovieDetail movies={allMovies} />} />
+                <Route path="/" element={<Home/>}/>
+              <Route path="/createaccount" element={<CreateAccount/>}/>
+              <Route path="/login" element={<LogIn/>}/>
+              <Route path="/regcon" element={<RegistrationConfirmation/>}/>
+              <Route path="/editprof" element={<EditProf/>}/>
+              <Route path="/book" element={<Book/>}/>
+              <Route path="/ordersummary" element={<OrderSummary/>}/>
+              <Route path="/checkout" element={<Checkout/>}/>
+              <Route path="/ordercon" element={<OrderConfirmation/>}/>
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/admin/movies" element={<AdminMovies />} />
                 <Route path="/admin/users" element={<Admin />} />

@@ -1,9 +1,8 @@
 import "../styles.css"
-import { MakeHeader } from "../components/MakeHeader"
-import { Link } from "react-router-dom"
+import Navbar from "../components/Navbar"
 export function Checkout() {
     return <>
-    <MakeHeader />
+    <Navbar />
     <h1>Checkout</h1>
     <p>Movie: *Selected Movie*</p>
     <p>Time: *Selected Time*</p>
