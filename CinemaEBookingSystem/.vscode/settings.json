@@ -4,5 +4,6 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
     ],
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "java.compile.nullAnalysis.mode": "automatic"
 }
