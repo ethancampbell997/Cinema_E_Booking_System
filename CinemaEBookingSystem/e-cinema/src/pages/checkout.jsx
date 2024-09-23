@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar"
 export function Checkout() {
     return <>
     <Navbar />
-    <h1>Checkout</h1>
+    <h1 className="below">Checkout</h1>
     <p>Movie: *Selected Movie*</p>
     <p>Time: *Selected Time*</p>
     <p>Seats: *Selected Seats*</p>

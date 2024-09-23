@@ -26,7 +26,7 @@ export function Book() {
     };
     return <>
     <Navbar />
-    <h1>Book Tickets</h1>
+    <h1 className="below">Book Tickets</h1>
     <h4>*Movie Name*</h4>
     <h4>Select Time:</h4>
     <form method="POST">

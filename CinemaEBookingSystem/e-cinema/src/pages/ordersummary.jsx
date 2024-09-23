@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar"
 export function OrderSummary() {
     return <>
     <Navbar />
-    <h1>Order Summary</h1>
+    <h1 className="below">Order Summary</h1>
     <p>Movie: *Selected Movie*</p>
     <p>Time: *Selected Time*</p>
     <p>Seats: *Selected Seats*</p>

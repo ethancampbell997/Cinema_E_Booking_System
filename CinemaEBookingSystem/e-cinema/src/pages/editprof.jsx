@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar"
 export function EditProf() {
     return <>
     <Navbar />
-    <h1>Edit Profile</h1>
+    <h1 className="below">Edit Profile</h1>
     <form method="POST">
     <label for="name">Name: </label>
     <input type="text" id="name" placeholder="John Doe"></input><br></br>
