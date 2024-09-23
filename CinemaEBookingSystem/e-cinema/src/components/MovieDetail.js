@@ -45,7 +45,7 @@ const MovieDetail = ({ movies }) => {
             <div className="hero-content">
               <h1>{movie.title}</h1>
               <div className="buttons">
-                <button><Link className="linkk"to="/book">Get Tickets</Link></button>
+                <button><Link to="/book">Get Tickets</Link></button>
                 <button className="watch-trailer" onClick={() => handleWatchTrailer(movie.trailer)}>
                   Watch Trailer
                 </button>
