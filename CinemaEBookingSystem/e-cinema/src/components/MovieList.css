@@ -32,6 +32,34 @@
     width: 100%;
 }
 
+.poster-container {
+    position: relative;
+    overflow: hidden;
+}
+  
+.movie-poster {
+    transition: transform 0.3s ease;
+}
+  
+.movie-card:hover .movie-poster {
+    transform: scale(1.05);
+}
+  
+.highlight-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+  
+.movie-card:hover .highlight-overlay {
+    opacity: 1;
+}
+
 .coming-soon {
     padding-top: 8px;
     padding-bottom: 10px;
@@ -40,7 +68,7 @@
 .watch-trailer {
     padding: 5px;
     background-color: #80B9F9;
-    border: 1px solid white;
+    border: none;
     border-radius: 10px;
     cursor: pointer;
     color: white;

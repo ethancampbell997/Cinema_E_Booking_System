@@ -8,7 +8,9 @@ const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <div className="logo">E-Cinema</div>
+            <div className="logo">
+                <a href="/">E-Cinema</a>
+            </div>
             <ul className="nav-links">
                 <li>
                     <a href="/" className={currentPath === '/' ? 'active' : ''}>Home</a>

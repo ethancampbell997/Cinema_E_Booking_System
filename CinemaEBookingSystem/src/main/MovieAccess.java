@@ -21,11 +21,13 @@ public class MovieAccess {
             Connection con = DriverManager.getConnection(url, username, password);
             if (con == null) {
                 return -1;
+
             } // if
 
             st = con.createStatement();
             if (st == null) {
                 return -1;
+
             } // if
 
             rs = st.executeQuery(sql);
@@ -33,18 +35,21 @@ public class MovieAccess {
                 /* Movie exists */
                 int i = rs.getInt(1);
                 return i;
+
             } // if
 
         } catch (SQLException e) {
             return -1;
+
         } // try
         
         return 0; // Movie does not exist
+
     } // getID
     
-    public String getStatus(String title) {
+    public String getStatus(int id) {
         /* Pre: Movie exists */
-        String sql = "select status from movies where title=" + title;
+        String sql = "select status from movies where id=" + Integer.toString(id);
         String url = "jdbc:mysql://localhost:3306/cinema_booking_db";
         String username = "root";
         String password = "Candawg34!";
@@ -55,11 +60,13 @@ public class MovieAccess {
             Connection con = DriverManager.getConnection(url, username, password);
             if (con == null) {
                 return "ERR";
+
             } // if
 
             st = con.createStatement();
             if (st == null) {
                 return "ERR";
+
             } // if
 
             rs = st.executeQuery(sql);
@@ -69,13 +76,14 @@ public class MovieAccess {
 
         } catch (SQLException e) {
             return "ERR";
+
         } // try
 
-    }
+    } // getStatus
 
-    public String getLink(String title) {
+    public String getLink(int id) {
         /* Pre: Movie exists */
-        String sql = "select link from movies where title=" + title;
+        String sql = "select link from movies where id=" + Integer.toString(id);
         String url = "jdbc:mysql://localhost:3306/cinema_booking_db";
         String username = "root";
         String password = "Candawg34!";
@@ -86,11 +94,13 @@ public class MovieAccess {
             Connection con = DriverManager.getConnection(url, username, password);
             if (con == null) {
                 return "ERR";
+
             } // if
 
             st = con.createStatement();
             if (st == null) {
                 return "ERR";
+
             } // if
 
             rs = st.executeQuery(sql);
@@ -100,6 +110,9 @@ public class MovieAccess {
 
         } catch (SQLException e) {
             return "ERR";
+
         } // try
-    }
-}
+
+    } // getLink
+    
+} // MovieAccess
