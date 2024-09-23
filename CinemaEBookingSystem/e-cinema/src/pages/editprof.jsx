@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar"
 export function EditProf() {
     return <>
     <Navbar />
+    <div className="wholepage">
     <h1 className="below">Edit Profile</h1>
     <form method="POST">
     <label for="name">Name: </label>
@@ -48,5 +49,6 @@ export function EditProf() {
 
     <input className="FinishButton" type="submit"></input>
   </form>
+  </div>
   </>
 }

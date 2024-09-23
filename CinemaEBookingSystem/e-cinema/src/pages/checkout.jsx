@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar"
 export function Checkout() {
     return <>
     <Navbar />
+    <div className="wholepage">
     <h1 className="below">Checkout</h1>
     <p>Movie: *Selected Movie*</p>
     <p>Time: *Selected Time*</p>
@@ -33,5 +34,6 @@ export function Checkout() {
     <input className="FinishButton" type="reset" value="Cancel"></input>
     <input className="FinishButton" type="submit" value="Confirm"></input>
     </form>
+    </div>
     </>
 }

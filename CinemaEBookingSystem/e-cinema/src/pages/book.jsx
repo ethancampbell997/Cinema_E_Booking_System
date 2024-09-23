@@ -26,6 +26,7 @@ export function Book() {
     };
     return <>
     <Navbar />
+    <div className="wholepage">
     <h1 className="below">Book Tickets</h1>
     <h4>*Movie Name*</h4>
     <h4>Select Time:</h4>
@@ -326,6 +327,6 @@ export function Book() {
                     ))}
                 </div>
         <input type="submit" className="FinishButton"></input>
-    </form>
+    </form></div>
     </>
 }

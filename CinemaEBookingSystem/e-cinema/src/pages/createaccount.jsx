@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 export function CreateAccount() {
     return <>
     <Navbar />
+    <div className="wholepage">
     <h1 className="below">Create Account</h1>
     <span>Already have an account? Log in </span>
     <Link className="linkk "to="/login">here</Link>
@@ -52,5 +53,6 @@ export function CreateAccount() {
     <input className="FinishButton" type="reset"></input>
     <input className="FinishButton" type="submit"></input>
   </form>
+  </div>
   </>
 }
