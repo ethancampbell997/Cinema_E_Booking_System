@@ -27,7 +27,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId> <!-- Correct artifactId -->
-            <version>8.0.32</version>
+            <version>8.0.33</version>
         </dependency>
 
         <!-- Spring Boot JPA for ORM -->
@@ -55,6 +55,14 @@
                 <version>3.0.5</version>
                 <configuration>
                     <mainClass>com.yourgroup.cinemaebooking.CinemaEBookingApplication</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <mainClass>com.yourgroup.cinemaebooking.db.DBTester</mainClass>
                 </configuration>
             </plugin>
         </plugins>
