@@ -78,7 +78,6 @@ function App() {
                   </>
                 } />
                 <Route path="/movie/:id" element={<MovieDetail movies={allMovies} />} />
-<<<<<<< HEAD
                 <Route path="/" element={<Home/>}/>
               <Route path="/createaccount" element={<CreateAccount/>}/>
               <Route path="/login" element={<LogIn/>}/>
@@ -88,13 +87,11 @@ function App() {
               <Route path="/ordersummary" element={<OrderSummary/>}/>
               <Route path="/checkout" element={<Checkout/>}/>
               <Route path="/ordercon" element={<OrderConfirmation/>}/>
-=======
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/admin/movies" element={<AdminMovies />} />
                 <Route path="/admin/users" element={<Admin />} />
                 <Route path="/admin/pricing" element={<Admin />} />
                 <Route path="/admin/promotions" element={<AdminPromotions />} />
->>>>>>> 6051f184efa58c5ac2b1a70008181de2ed5e9362
             </Routes>
             {!isAdminRoute && <Footer />}
     </div>
