@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar"
 export function LogIn() {
     return <>
     <Navbar />
+    <div className="wholepage">
     <h1 className="below">Log in</h1>
     <span>New User? Sign up </span>
     <Link className="linkk "to="/createaccount">here!</Link>
@@ -15,5 +16,6 @@ export function LogIn() {
     <input type="password" id="password" placeholder="Your Password" required></input><br></br>
     <input className="FinishButton" type="submit"></input>
     </form>
+    </div>
     </>
 }

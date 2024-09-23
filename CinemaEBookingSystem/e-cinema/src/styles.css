@@ -39,11 +39,12 @@ h3{
   text-decoration: underline;
   text-decoration: color(rgb(55, 198, 233));
 }
-.FinishButton button{
+.FinishButton {
   border-radius: 10px;
   font-size: 20px;
   padding-left: 6px;
   padding-right: 6px;
+  color: black;
 }
 .FinishButton:hover, button:hover{
   background-color: rgb(55, 198, 233);
@@ -60,4 +61,11 @@ h3{
 }
 .below{
   padding-top: 100px;
+}
+input{
+  color: black;
+}
+.wholepage{
+  padding-left: 150px;
+  padding-right: 150px;
 }

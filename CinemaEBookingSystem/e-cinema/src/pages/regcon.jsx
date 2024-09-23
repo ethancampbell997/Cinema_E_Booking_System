@@ -4,7 +4,9 @@ import { Link } from "react-router-dom"
 export function RegistrationConfirmation() {
     return <>
     <Navbar />
-    <h1>Congrats! You have successfully registered your account!</h1>
+    <div className="wholepage">
+    <h1 className="below">Congrats! You have successfully registered your account!</h1>
     <Link to="/" className="linkk">Home</Link>
+    </div>
     </>
 }
