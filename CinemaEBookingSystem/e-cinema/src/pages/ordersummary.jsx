@@ -1,8 +1,8 @@
 import "../styles.css"
-import { MakeHeader } from "../components/MakeHeader"
+import Navbar from "../components/Navbar"
 export function OrderSummary() {
     return <>
-    <MakeHeader />
+    <Navbar />
     <h1>Order Summary</h1>
     <p>Movie: *Selected Movie*</p>
     <p>Time: *Selected Time*</p>

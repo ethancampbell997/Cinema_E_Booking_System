@@ -1,5 +1,5 @@
 import "../styles.css"
-import { MakeHeader } from "../components/MakeHeader"
+import Navbar from "../components/Navbar";
 import { useState } from "react"
 export function Book() {
     const [ages, setAges] = useState({});
@@ -25,7 +25,7 @@ export function Book() {
         }));
     };
     return <>
-    <MakeHeader />
+    <Navbar />
     <h1>Book Tickets</h1>
     <h4>*Movie Name*</h4>
     <h4>Select Time:</h4>

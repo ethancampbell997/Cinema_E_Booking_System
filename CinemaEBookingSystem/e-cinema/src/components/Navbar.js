@@ -1,7 +1,7 @@
 import React from "react";
 import './Navbar.css';
 import { useLocation } from 'react-router-dom';
-
+import { Link } from "react-router-dom"
 const Navbar = () => {
     const location = useLocation();
     const currentPath = location.pathname;
@@ -22,8 +22,8 @@ const Navbar = () => {
             </ul>
             <div className="nav-right">
                 <input type="text" placeholder="Search" className="search-bar" />
-                <button className="sign-in">Sign In</button>
-                <button className="sign-up">Sign Up</button>
+                <button className="sign-in"><Link className="linkk"to="/login">Sign In</Link></button>
+                <button className="sign-up"><Link className="linkk "to="/createaccount">Sign Up</Link></button>
             </div>
         </nav>
     );

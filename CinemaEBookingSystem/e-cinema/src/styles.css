@@ -2,13 +2,13 @@
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
 }
-body {
+/*body {
   background: #333;
   color: hsl(200, 100%, 90%);
   max-width: 1200px;
   padding: 1rem;
   margin: 0 auto;
-}
+}*/
 .reqqq{
   color: red;
 }
