@@ -151,6 +151,3 @@ public class MovieAccess {
     } // getLink
 
 } // MovieAccess
-    } // getLink
-
-} // MovieAccess
