@@ -9,7 +9,7 @@ import java.lang.Class;
 
 public class MovieAccess {
     
-    public int getID(String title) {
+    public static int getID(String title) {
         String sql = "select movie_id from movies where title='" + title + "'";
         String url = "jdbc:mysql://172.20.110.101:3306/cinema_booking";
         String username = "cameran";
@@ -47,7 +47,7 @@ public class MovieAccess {
 
     } // getID
 
-    public String getTitle(int id) throws Exception {
+    public static String getTitle(int id) throws Exception {
         /* Pre: Movie exists */
         String sql = "select title from movies where movie_id=" + Integer.toString(id);
         String url = "jdbc:mysql://172.20.110.101:3306/cinema_booking";
@@ -82,7 +82,7 @@ public class MovieAccess {
 
     } // getTitle
     
-    public String getStatus(int id) {
+    public static String getStatus(int id) {
         /* Pre: Movie exists */
         String sql = "select status from movies where movie_id=" + Integer.toString(id);
         String url = "jdbc:mysql://172.20.110.101:3306/cinema_booking";
@@ -116,7 +116,7 @@ public class MovieAccess {
 
     } // getStatus
 
-    public String getLink(int id) {
+    public static String getLink(int id) {
         /* Pre: Movie exists */
         String sql = "select trailer_link from movies where movie_id=" + Integer.toString(id);
         String url = "jdbc:mysql://172.20.110.101:3306/cinema_booking";
@@ -148,6 +148,9 @@ public class MovieAccess {
 
         } // try
 
+    } // getLink
+
+} // MovieAccess
     } // getLink
 
 } // MovieAccess
