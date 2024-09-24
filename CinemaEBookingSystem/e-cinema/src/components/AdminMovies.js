@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Breadcrumb from './Breadcrumb';
-import MovieTable from './MovieTable'; // Make sure the path is correct
+import MovieTable from './MovieTable';
 import { allMoviesWithStatus } from '../App';
 
 import './Admin.css'; 
