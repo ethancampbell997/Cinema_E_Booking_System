@@ -13,7 +13,7 @@ public class MovieController {
     public static String searchTitle(@RequestBody String title) {
         for (MovieObject movie : movieDB) {
             if (movie.getTitle().equalsIgnoreCase(title)) {
-                return movie.getTitle();
+                return movie.toString();
             }
         }
         return null;
