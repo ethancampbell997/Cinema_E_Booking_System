@@ -4,27 +4,37 @@ import "./ResultsPage.css";
 
 const ResultsPage = () => {
     const { searchTerm } = useParams(); 
-    const [results, setResults] = useState([]);
+    const [searchResult, setSearchResult] = useState("");
+
 
     useEffect(() => {
         const fetchResults = async () => {
             try {
+                // Make the API request to your Spring Boot backend via POST
                 const response = await fetch("http://localhost:8080/movies/search", {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ title: searchTerm }),
+                    body: JSON.stringify({ title: searchTerm })  // Send search term as JSON
                 });
-
+    
                 if (response.ok) {
-                    const data = await response.json(); 
-                    setResults(data); 
+                    const result = await response.text(); // Assuming the backend returns plain text
+                    setSearchResult(result); // Update the state with the result
+                    const resultData = result.replace("Search Result: ", "").split(", ");
+                    const [title, status, trailerLink, imageLink] = resultData;
+                    console.log("Title:", title);
+                    console.log("Status:", status);
+                    console.log("Trailer Link:", trailerLink);
+                    console.log("Image Link:", imageLink);
+
+
                 } else {
-                    setResults([{ title: "Error: Movie not found or an error occurred." }]);
+                    setSearchResult("Error: Movie not found or an error occurred.");
                 }
             } catch (error) {
-                setResults([{ title: "Error: " + error.message }]);
+                setSearchResult("Error: " + error.message);
             }
         };
 
@@ -34,11 +44,11 @@ const ResultsPage = () => {
     return (
         <div className="body">
             <h1>Search Results for "{searchTerm}"</h1>
-            <ul>
-                {results.map((result, index) => (
-                    <li key={index}>{result.title}</li>
-                ))}
-            </ul>
+            {searchResult && (
+                <div className="search-result">
+                    <p>{searchResult}</p>
+                </div>
+            )}
         </div>
     );
 };
