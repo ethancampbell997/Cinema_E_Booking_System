@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import './Navbar.css';
 import { useLocation } from 'react-router-dom';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
     const location = useLocation();
     const currentPath = location.pathname;
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResult, setSearchResult] = useState("");
+
+    const handleSearchInput = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleKeyDown = async (event) => {
+        if (event.key === "Enter") {
+            // Make the API request to your Spring Boot backend
+            const response = await fetch("http://localhost:8080/movies/search", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(searchTerm)
+            });
+
+            const result = await response.text(); // Assuming your backend returns plain text
+            setSearchResult(result); // Display the result
+        }
+    };
 
     return (
         <nav className="navbar">
@@ -23,12 +46,24 @@ const Navbar = () => {
                 </li>
             </ul>
             <div className="nav-right">
-                <input type="text" placeholder="Search" className="search-bar" />
+                <input
+                    type="text"
+                    placeholder="Search"
+                    className="search-bar"
+                    value={searchTerm}
+                    onChange={handleSearchInput}
+                    onKeyDown={handleKeyDown}
+                />
                 <button className="sign-in"><Link to="/login">Sign In</Link></button>
                 <button className="sign-up"><Link to="/createaccount">Sign Up</Link></button>
             </div>
+            {searchResult && (
+                <div className="search-result">
+                    <p>Search Result: {searchResult}</p>
+                </div>
+            )}
         </nav>
     );
-}
+};
 
 export default Navbar;

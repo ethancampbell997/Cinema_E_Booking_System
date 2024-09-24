@@ -54,7 +54,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>3.0.5</version>
                 <configuration>
-                    <mainClass>com.yourgroup.cinemaebooking.CinemaEBookingApplication</mainClass>
+                    <mainClass>com.yourgroup.cinemaebooking.MovieApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>

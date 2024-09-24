@@ -35,7 +35,7 @@ import { Checkout } from "./pages/checkout";
 import { OrderConfirmation } from "./pages/ordercon";
 
 const moviesNowPlaying = [
-  { id: 'deadpool-and-wolverine', title: 'Deadpool & Wolverine', rating: '4⭐', poster: Deadpool, trailer: 'https://www.youtube.com/watch?v=73_1biulkYk' },
+  { id: 'deadpool-and-wolverine', title: 'Deadpool & Wolverine', rating: '4⭐', poster: Deadpool, trailer: 'https://www.youtube.com/embed/73_1biulkYk?si=7NG9AOkrLdypCVbo' },
   { id: 'transformers-one', title: 'Transformers One', rating: '4⭐', poster: Transformers, trailer: 'https://www.youtube.com/watch?v=u2NuUWuwPCM' },
   { id: 'beetlejuice-beetlejuice', title: 'Beetlejuice Beetlejuice', rating: '3.6⭐', poster: Beetlejuice, trailer: 'https://www.youtube.com/watch?v=CoZqL9N6Rx4' },
   { id: 'speak-no-evil', title: 'Speak No Evil', rating: '3.6⭐', poster: SpeakNoEvil, trailer: 'https://www.youtube.com/watch?v=FjzxI6uf8H8' },
