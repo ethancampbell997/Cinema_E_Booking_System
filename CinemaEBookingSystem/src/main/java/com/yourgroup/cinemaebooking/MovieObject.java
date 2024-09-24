@@ -9,13 +9,15 @@ public class MovieObject {
     private int id;
     private String title;
     private String status;
-    private String link;
+    private String trailerLink;
+    private String trailerPic;
 
     public MovieObject() {
         id = -1;
         title = "ERR";
         status = "ERR";
-        link = "ERR";
+        trailerLink = "ERR";
+        trailerPic = "ERR";
     }
 
     public MovieObject(String t) {
@@ -24,18 +26,21 @@ public class MovieObject {
             /* Error when querying database */
             title = "ERR";
             status = "ERR";
-            link = "ERR";
+            trailerLink = "ERR";
+            trailerPic = "ERR";
 
         } else if (id == 0) {
             /* Movie with title t does not exist */
             title = "DNE";
             status = "DNE";
-            link = "DNE";
+            trailerLink = "DNE";
+            trailerPic = "DNE";
 
         } else {
             title = t;
             status = MovieAccess.getStatus(id);
-            link = MovieAccess.getLink(id);
+            trailerLink = MovieAccess.getTrailerLink(id);
+            trailerPic = MovieAccess.getTrailerPic(id);
 
         } // if
 
@@ -51,13 +56,18 @@ public class MovieObject {
 
     } // getStatus
 
-    public String getLink() {
-        return link;
+    public String getTrailerLink() {
+        return trailerLink;
 
-    } // getLink
+    } // getTrailerLink
+
+    public String getTrailerPic() {
+        return trailerPic;
+
+    } // getTrailerPic
 
     public String toString() {
-        String temp = title + ", " + link;
+        String temp = title + ", " + trailerLink + ", " + trailerPic;
         return temp;
 
     } // toString

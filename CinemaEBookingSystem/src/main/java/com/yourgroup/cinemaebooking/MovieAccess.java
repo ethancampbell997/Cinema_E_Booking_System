@@ -116,7 +116,7 @@ public class MovieAccess {
 
     } // getStatus
 
-    public static String getLink(int id) {
+    public static String getTrailerLink(int id) {
         /* Pre: Movie exists */
         String sql = "select trailer_link from movies where movie_id=" + Integer.toString(id);
         String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
@@ -148,6 +148,40 @@ public class MovieAccess {
 
         } // try
 
-    } // getLink
+    } // getTrailerLink
+
+    public static String getTrailerPic(int id) {
+        /* Pre: Movie exists */
+        String sql = "select trailer_pic from movies where movie_id=" + Integer.toString(id);
+        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
+        String username = "cameran";
+        String password = "Candawg34!";
+        Statement st = null;
+        ResultSet rs = null;
+
+        try {
+            Connection con = DriverManager.getConnection(url, username, password);
+            if (con == null) {
+                return "ERR";
+
+            } // if
+
+            st = con.createStatement();
+            if (st == null) {
+                return "ERR";
+
+            } // if
+
+            rs = st.executeQuery(sql);
+            rs.next();
+            String link = rs.getString(1);
+            return link;
+
+        } catch (SQLException e) {
+            return "ERR";
+
+        } // try
+
+    } // getTrailerPic
 
 } // MovieAccess
