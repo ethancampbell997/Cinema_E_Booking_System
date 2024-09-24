@@ -11,7 +11,7 @@ public class MovieAccess {
     
     public static int getID(String title) {
         String sql = "select movie_id from movies where title='" + title + "'";
-        String url = "jdbc:mysql://172.20.110.101:3306/cinema_booking";
+        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
         String username = "cameran";
         String password = "Candawg34!";
         Statement st = null;
@@ -50,7 +50,7 @@ public class MovieAccess {
     public static String getTitle(int id) throws Exception {
         /* Pre: Movie exists */
         String sql = "select title from movies where movie_id=" + Integer.toString(id);
-        String url = "jdbc:mysql://172.20.110.101:3306/cinema_booking";
+        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
         String username = "cameran";
         String password = "Candawg34!";
         Statement st = null;
@@ -85,7 +85,7 @@ public class MovieAccess {
     public static String getStatus(int id) {
         /* Pre: Movie exists */
         String sql = "select status from movies where movie_id=" + Integer.toString(id);
-        String url = "jdbc:mysql://172.20.110.101:3306/cinema_booking";
+        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
         String username = "cameran";
         String password = "Candawg34!";
         Statement st = null;
@@ -119,7 +119,7 @@ public class MovieAccess {
     public static String getLink(int id) {
         /* Pre: Movie exists */
         String sql = "select trailer_link from movies where movie_id=" + Integer.toString(id);
-        String url = "jdbc:mysql://172.20.110.101:3306/cinema_booking";
+        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
         String username = "cameran";
         String password = "Candawg34!";
         Statement st = null;
