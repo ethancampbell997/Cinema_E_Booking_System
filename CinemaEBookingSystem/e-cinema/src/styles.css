@@ -61,6 +61,7 @@ h3{
 }
 .below{
   padding-top: 100px;
+  margin: 0;
 }
 input{
   color: black;
@@ -68,4 +69,5 @@ input{
 .wholepage{
   padding-left: 150px;
   padding-right: 150px;
+  height: 94vh;
 }
