@@ -9,6 +9,6 @@ public class DBTester {
         MovieObject M = new MovieObject("The Matrix");
         System.out.println("Title: " + M.getTitle());
         System.out.println("Status: " + M.getStatus());
-        System.out.println("Link: " + M.getLink());
+        System.out.println("Link: " + M.getTrailerLink());
     }
 }
