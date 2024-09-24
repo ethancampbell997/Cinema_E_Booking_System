@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import "./ResultsPage.css";
 
 const ResultsPage = () => {
-    const { searchTerm } = useParams(); // Get the search term from the URL
+    const { searchTerm } = useParams(); 
     const [results, setResults] = useState([]);
 
     useEffect(() => {
@@ -18,8 +18,8 @@ const ResultsPage = () => {
                 });
 
                 if (response.ok) {
-                    const data = await response.json(); // Assuming the backend returns JSON
-                    setResults(data); // Assuming the API returns an array of results
+                    const data = await response.json(); 
+                    setResults(data); 
                 } else {
                     setResults([{ title: "Error: Movie not found or an error occurred." }]);
                 }

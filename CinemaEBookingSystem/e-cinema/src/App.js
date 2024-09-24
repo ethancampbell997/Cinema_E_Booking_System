@@ -11,6 +11,7 @@ import Admin from './components/Admin';
 import AdminMovies from './components/AdminMovies';
 import AdminPromotions from './components/AdminPromotions';
 import ResultsPage from './components/ResultsPage';
+import MoviesPage from './components/MoviesPage';
 
 import Deadpool from './images/posters/Deadpool.png';
 import Transformers from './images/posters/Transformers.png';
@@ -78,6 +79,7 @@ function App() {
                   <MovieList title="Coming Soon" movies={moviesComingSoon} />
                   </>
                 } />
+                <Route path="/movies" element={<MoviesPage moviesNowPlaying={moviesNowPlaying} />} />
                 <Route path="/results/:searchTerm" element={<ResultsPage />} />
                 <Route path="/movie/:id" element={<MovieDetail movies={allMovies} />} />
                 <Route path="/" element={<Home/>}/>

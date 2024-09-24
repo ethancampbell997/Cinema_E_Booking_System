@@ -15,7 +15,6 @@ const Navbar = () => {
 
     const handleKeyDown = async (event) => {
         if (event.key === "Enter") {
-            // Navigate to the results page with the search term
             navigate(`/results/${encodeURIComponent(searchTerm)}`);
         }
     };

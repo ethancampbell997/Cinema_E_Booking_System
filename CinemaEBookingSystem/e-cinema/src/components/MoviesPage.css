@@ -1,0 +1,45 @@
+.movies-page {
+  padding: 20px;
+  text-align: center;
+  height: 94vh;
+}
+
+.search-container {
+  padding-top: 110px;
+  margin-bottom: 20px;
+}
+
+.search-container .search-bar {
+  width: 80%;
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-item {
+  margin: 10px;
+  text-align: center;
+}
+
+.movie-item img {
+  width: 150px;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.movie-item img:hover {
+  transform: scale(1.05);
+}
+
+.movie-item h3 {
+  font-size: 18px;
+  margin-top: 10px;
+}
