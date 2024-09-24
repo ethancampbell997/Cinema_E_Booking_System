@@ -67,7 +67,7 @@ public class MovieObject {
     } // getTrailerPic
 
     public String toString() {
-        String temp = title + ", " + trailerLink + ", " + trailerPic;
+        String temp = title + ", " + status + ", " + trailerLink + ", " + trailerPic;
         return temp;
 
     } // toString
