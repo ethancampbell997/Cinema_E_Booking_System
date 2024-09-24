@@ -1,16 +1,14 @@
 package com.yourgroup.cinemaebooking;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/movies")
 public class MovieController {
-    //@Autowired
-
-    @GetMapping("/search")
-    public String searchTitle(@RequestParam(value = "title") String title) {
+    
+    @PostMapping("/search") // Change to POST
+    public String searchTitle(@RequestBody MovieRequest request) {
+        String title = request.getTitle(); // Extract title from request body
         if (title.isEmpty()) {
             return "Title parameter is required.";
         }
@@ -23,5 +21,18 @@ public class MovieController {
         }
 
         return m.toString();
+    }
+}
+
+// Create a DTO for the request
+class MovieRequest {
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

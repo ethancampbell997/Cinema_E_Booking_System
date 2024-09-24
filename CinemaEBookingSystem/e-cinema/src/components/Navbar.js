@@ -15,19 +15,28 @@ const Navbar = () => {
 
     const handleKeyDown = async (event) => {
         if (event.key === "Enter") {
-            // Make the API request to your Spring Boot backend
-            const response = await fetch("http://localhost:8080/movies/search", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(searchTerm)
-            });
-
-            const result = await response.text(); // Assuming your backend returns plain text
-            setSearchResult(result); // Display the result
+            try {
+                // Make the API request to your Spring Boot backend via POST
+                const response = await fetch("http://localhost:8080/movies/search", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ title: searchTerm })  // Send search term as JSON
+                });
+    
+                if (response.ok) {
+                    const result = await response.text(); // Assuming the backend returns plain text
+                    setSearchResult(result); // Update the state with the result
+                } else {
+                    setSearchResult("Error: Movie not found or an error occurred.");
+                }
+            } catch (error) {
+                setSearchResult("Error: " + error.message);
+            }
         }
     };
+    
 
     return (
         <nav className="navbar">
