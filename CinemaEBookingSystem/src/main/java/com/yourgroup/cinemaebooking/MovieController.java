@@ -12,12 +12,12 @@ public class MovieController {
     @GetMapping("/search")
     public String searchTitle(@RequestBody String title) {
         MovieObject m = new MovieObject(title);
-        if (MovieObject.getTitle().equalsIgnoreCase("ERR")) {
+        if (m.getTitle().equalsIgnoreCase("ERR")) {
             return "ERR";
-        } else if (MovieObject.getTitle().equalsIgnoreCase("DNE")) {
+        } else if (m.getTitle().equalsIgnoreCase("DNE")) {
             return "DNE";
         }
 
-        return MovieObject.toString();
+        return m.toString();
     }
 }
