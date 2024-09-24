@@ -28,6 +28,14 @@ const Navbar = () => {
                 if (response.ok) {
                     const result = await response.text(); // Assuming the backend returns plain text
                     setSearchResult(result); // Update the state with the result
+                    const resultData = result.replace("Search Result: ", "").split(", ");
+                    const [title, status, trailerLink, imageLink] = resultData;
+                    console.log("Title:", title);
+                    console.log("Status:", status);
+                    console.log("Trailer Link:", trailerLink);
+                    console.log("Image Link:", imageLink);
+
+
                 } else {
                     setSearchResult("Error: Movie not found or an error occurred.");
                 }
