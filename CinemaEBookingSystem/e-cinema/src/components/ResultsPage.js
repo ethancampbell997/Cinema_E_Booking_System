@@ -12,6 +12,13 @@ const ResultsPage = () => {
         return title.toLowerCase().replace(/\s+/g, '-'); 
     };
 
+    const capitalizeFirstLetters = (str) => {
+        return str
+            .split(' ') 
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1)) 
+            .join(' '); 
+    };
+
     useEffect(() => {
         const fetchResults = async () => {
             setLoading(true); // Start loading
@@ -23,7 +30,7 @@ const ResultsPage = () => {
                     },
                     body: JSON.stringify({ title: searchTerm })
                 });
-
+    
                 if (response.ok) {
                     const result = await response.text();
                     const resultData = result.replace("Search Result: ", "").split(", ");
@@ -33,8 +40,8 @@ const ResultsPage = () => {
                     } else {
                         const [title, status, trailerLink, imageLink] = resultData;
                         setSearchResult([{
-                            id: title.toLowerCase().replace(/\s+/g, '-'),
-                            title,
+                            id: generateIdFromTitle(title), 
+                            title: capitalizeFirstLetters(title),
                             status,
                             trailer: trailerLink,
                             poster: imageLink,
@@ -49,7 +56,7 @@ const ResultsPage = () => {
                 setLoading(false);
             }
         };
-
+    
         fetchResults();
     }, [searchTerm]);
 

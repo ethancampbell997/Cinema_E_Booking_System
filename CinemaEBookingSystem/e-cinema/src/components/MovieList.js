@@ -12,6 +12,7 @@ const MovieList = ({ title, movies = [], loading }) => {
       console.warn("Trailer URL is not available.");
     }
   };
+  console.log(movies);
 
   const closeTrailer = () => {
     setSelectedTrailer(null);
@@ -39,7 +40,7 @@ const MovieList = ({ title, movies = [], loading }) => {
               </Link>
               {title === "Now Playing" && (
                 <div className="movie-info">
-                  <p>{movie.rating}</p>
+                  { /* <p>{movie.rating}</p> */ }
                   <button className="watch-trailer" onClick={() => handleWatchTrailer(movie.trailerLink)}>
                     Watch Trailer
                   </button>
