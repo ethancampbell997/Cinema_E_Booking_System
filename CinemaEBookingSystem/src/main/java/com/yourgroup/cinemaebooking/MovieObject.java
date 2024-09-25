@@ -19,6 +19,13 @@ public class MovieObject {
         trailerLink = "ERR";
         trailerPic = "ERR";
     }
+    public MovieObject(int id, String title, String status, String trailerLink, String trailerPic) {
+        this.id = id;
+        this.title = title;
+        this.status = status;
+        this.trailerLink = trailerLink;
+        this.trailerPic = trailerPic;
+    }
 
     public MovieObject(String t) {
         id = MovieAccess.getID(t);

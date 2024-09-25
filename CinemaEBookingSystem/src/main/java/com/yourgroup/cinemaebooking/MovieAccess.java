@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.lang.Class;
+import java.util.*;
 
 public class MovieAccess {
     
@@ -183,5 +184,43 @@ public class MovieAccess {
         } // try
 
     } // getTrailerPic
+    public static ArrayList<MovieObject> getAllMovies() {
+        String sql = "SELECT * FROM movies";
+        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
+        String username = "cameran";
+        String password = "Candawg34!";
+        Statement st = null;
+        ResultSet rs = null;
+        ArrayList<MovieObject> movies = new ArrayList<>();
+
+        try {
+            Connection con = DriverManager.getConnection(url, username, password);
+            if (con == null) {
+                return null;
+            }
+
+            st = con.createStatement();
+            if (st == null) {
+                return null;
+            }
+
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("movie_id");
+                String title = rs.getString("title");
+                String status = rs.getString("status");
+                String trailerLink = rs.getString("trailer_link");
+                String trailerPic = rs.getString("trailer_pic");
+
+                MovieObject movie = new MovieObject(id, title, status, trailerLink, trailerPic);
+                movies.add(movie);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return movies;
+    }
 
 } // MovieAccess

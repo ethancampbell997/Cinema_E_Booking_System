@@ -1,6 +1,7 @@
 package com.yourgroup.cinemaebooking;
 
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/movies")
@@ -21,6 +22,10 @@ public class MovieController {
         }
 
         return m.toString();
+    }
+    @GetMapping("/all")
+    public List<MovieObject> getAllMovies() {
+        return MovieAccess.getAllMovies();
     }
 }
 

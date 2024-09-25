@@ -1,6 +1,7 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
@@ -68,6 +69,20 @@ const allMovies = [...moviesNowPlaying, ...moviesComingSoon];
 function App() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
+  const [moviesNowPlaying, setMoviesNowPlaying] = useState([]);
+  const [moviesComingSoon, setMoviesComingSoon] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:8080/movies/all') // Replace with your actual backend URL
+      .then(response => response.json())
+      .then(data => {
+        // Separate the movies into 'Now Playing' and 'Coming Soon'
+        const nowPlaying = data.filter(movie => movie.status === 'Now Playing');
+        const comingSoon = data.filter(movie => movie.status === 'Coming Soon');
+        setMoviesNowPlaying(nowPlaying);
+        setMoviesComingSoon(comingSoon);
+      })
+      .catch(error => console.error('Error fetching movies:', error));
+  }, []);
 
   return (
     <div className="App">
