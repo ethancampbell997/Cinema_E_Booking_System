@@ -71,29 +71,35 @@ function App() {
   const isAdminRoute = location.pathname.startsWith('/admin');
   const [moviesNowPlaying, setMoviesNowPlaying] = useState([]);
   const [moviesComingSoon, setMoviesComingSoon] = useState([]);
+  const [error] = useState(null);
+
   useEffect(() => {
-    fetch('http://localhost:8080/movies/all') // Replace with your actual backend URL
-      .then(response => response.json())
-      .then(data => {
-        // Separate the movies into 'Now Playing' and 'Coming Soon'
-        const nowPlaying = data.filter(movie => movie.status === 'Now Playing');
-        const comingSoon = data.filter(movie => movie.status === 'Coming Soon');
-        setMoviesNowPlaying(nowPlaying);
-        setMoviesComingSoon(comingSoon);
-      })
-      .catch(error => console.error('Error fetching movies:', error));
+    fetch('http://localhost:8080/movies/all') // Adjust the endpoint to your actual API
+        .then(response => response.json())
+        .then(data => {
+            setMoviesNowPlaying(data.filter(movie => movie.status === 'Now Playing'));
+            setMoviesComingSoon(data.filter(movie => movie.status === 'Coming Soon'));
+        })
+        .catch(error => console.error('Error fetching movies:', error));
   }, []);
 
   return (
     <div className="App">
             {!isAdminRoute && <Navbar />}
             <Routes>
-                <Route path="/" element={
-                  <><HeroSection />
-                  <MovieList title="Now Playing" movies={moviesNowPlaying} />
-                  <MovieList title="Coming Soon" movies={moviesComingSoon} />
-                  </>
-                } />
+              <Route path="/" element={
+                <>
+                  <HeroSection />
+                  {error ? (
+                    <p>Error fetching movies: {error}</p>
+                  ) : (
+                    <>
+                      <MovieList title="Now Playing" movies={moviesNowPlaying} />
+                      <MovieList title="Coming Soon" movies={moviesComingSoon} />
+                    </>
+                  )}
+                </>
+              } />
                 <Route path="/movies" element={<MoviesPage moviesNowPlaying={moviesNowPlaying} />} />
                 <Route path="/results/:searchTerm" element={<ResultsPage />} />
                 <Route path="/movie/:id" element={<MovieDetail movies={allMovies} />} />

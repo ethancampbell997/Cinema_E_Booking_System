@@ -8,7 +8,11 @@ import { allMoviesWithStatus } from '../App';
 import './Admin.css'; 
 import './Breadcrumb.css';
 
-const AdminMovies = () => {
+const AdminMovies = ( movie ) => {
+  const handleAdd = (id) => {
+    console.log(`Updating movie with ID: ${id}`);
+  };
+
   return (
     <div className="admin-container">
       <div className="admin-sidebar">
@@ -33,6 +37,7 @@ const AdminMovies = () => {
         <div className="admin-body">
           <Breadcrumb />
           <MovieTable movies={allMoviesWithStatus} />
+          <button className="add" onClick={() => handleAdd(movie.id)}>Add new movie</button>
         </div>
       </div>
     </div>

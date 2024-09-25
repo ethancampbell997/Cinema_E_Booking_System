@@ -6,12 +6,16 @@ import PromotionsTable from './PromotionsTable';
 import './Admin.css'; 
 import './Breadcrumb.css';
 
-const Admin = () => {
+const AdminPromotions = ( promo ) => {
   const [promotions, setPromotions] = useState([
     { id: 1, code: 'SAVE10', description: '10% off any movie' },
     { id: 2, code: 'HOLIDAYS2024', description: 'Spread the holiday spririt with a BOGO deal' },
     { id: 3, code: 'MUNCHIES2', description: 'Receive a medium drink with the purchase of any size popcorn' },
   ]);
+
+  const handleAdd = (id) => {
+    console.log(`Updating code with ID: ${id}`);
+  };
 
   const handleDelete = (id) => {
     setPromotions(promotions.filter((promo) => promo.id !== id));
@@ -42,10 +46,11 @@ const Admin = () => {
           <Breadcrumb />
           <h1>Welcome, Admin1</h1>
           <PromotionsTable promotions={promotions} onDelete={handleDelete} />
+          <button className="add" onClick={() => handleAdd(promo.id)}>Add new code</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default Admin;
+export default AdminPromotions;
