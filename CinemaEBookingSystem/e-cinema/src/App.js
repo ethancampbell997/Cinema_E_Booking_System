@@ -74,7 +74,7 @@ function App() {
   const [error] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8080/movies/all') // Adjust the endpoint to your actual API
+    fetch('http://localhost:8080/movies/all') 
         .then(response => response.json())
         .then(data => {
             setMoviesNowPlaying(data.filter(movie => movie.status === 'Now Playing'));
