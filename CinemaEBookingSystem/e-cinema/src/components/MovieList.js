@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './MovieList.css';
 
 const MovieList = ({ title, movies = [], loading }) => {
+  const [selectedTrailer, setSelectedTrailer] = useState(null);
+
   const handleWatchTrailer = (trailerUrl) => {
     if (trailerUrl) {
-      window.open(trailerUrl, '_blank');
+      setSelectedTrailer(trailerUrl);
     } else {
       console.warn("Trailer URL is not available.");
     }
   };
-  console.log(movies);
+
+  const closeTrailer = () => {
+    setSelectedTrailer(null);
+  };
 
   return (
     <section className="movie-list">
@@ -53,6 +58,20 @@ const MovieList = ({ title, movies = [], loading }) => {
           <p>No movies available.</p>
         )}
       </div>
+      {selectedTrailer && (
+        <div className="trailer-container">
+          <button className="close-trailer" onClick={closeTrailer}>Close</button>
+          <iframe
+            width="560"
+            height="315"
+            src={selectedTrailer}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+      )}
     </section>
   );
 };
