@@ -11,6 +11,7 @@ public class MovieObject {
     private String status;
     private String trailerLink;
     private String trailerPic;
+    private String rating;
 
     public MovieObject() {
         id = -1;
@@ -18,13 +19,15 @@ public class MovieObject {
         status = "ERR";
         trailerLink = "ERR";
         trailerPic = "ERR";
+        rating = "ERR";
     }
-    public MovieObject(int id, String title, String status, String trailerLink, String trailerPic) {
+    public MovieObject(int id, String title, String status, String trailerLink, String trailerPic, String rating) {
         this.id = id;
         this.title = title;
         this.status = status;
         this.trailerLink = trailerLink;
         this.trailerPic = trailerPic;
+        this.rating = rating;
     }
 
     public MovieObject(String t) {
@@ -35,6 +38,7 @@ public class MovieObject {
             status = "ERR";
             trailerLink = "ERR";
             trailerPic = "ERR";
+            rating = "ERR";
 
         } else if (id == 0) {
             /* Movie with title t does not exist */
@@ -42,12 +46,14 @@ public class MovieObject {
             status = "DNE";
             trailerLink = "DNE";
             trailerPic = "DNE";
+            rating = "DNE";
 
         } else {
             title = t;
             status = MovieAccess.getStatus(id);
             trailerLink = MovieAccess.getTrailerLink(id);
             trailerPic = MovieAccess.getTrailerPic(id);
+            rating = MovieAccess.getRating(id);
 
         } // if
 
@@ -73,8 +79,13 @@ public class MovieObject {
 
     } // getTrailerPic
 
+    public String getRating() {
+        return rating;
+
+    } // getRating
+
     public String toString() {
-        String temp = title + ", " + status + ", " + trailerLink + ", " + trailerPic;
+        String temp = title + ", " + status + ", " + trailerLink + ", " + trailerPic + ", " + rating;
         return temp;
 
     } // toString

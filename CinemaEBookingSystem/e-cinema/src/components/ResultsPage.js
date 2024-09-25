@@ -13,15 +13,22 @@ const ResultsPage = () => {
     };
 
     const capitalizeFirstLetters = (str) => {
-        return str
-            .split(' ') 
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1)) 
-            .join(' '); 
+        const parts = str.split(/([- ])/);
+    
+        return parts
+            .map(part => {
+                if (part.trim() && !part.includes('-')) {
+                    return part.charAt(0).toUpperCase() + part.slice(1);
+                }
+                return part; 
+            })
+            .join('')
+            .replace(/ +/g, ' ');
     };
 
     useEffect(() => {
         const fetchResults = async () => {
-            setLoading(true); // Start loading
+            setLoading(true); 
             try {
                 const response = await fetch("http://localhost:8080/movies/search", {
                     method: "POST",
@@ -66,7 +73,7 @@ const ResultsPage = () => {
             <section className="movie-list">
                 <div className="movie-cards">
                     {loading ? (
-                        <p>Loading...</p> // Show loading message while fetching
+                        <p>Loading...</p> 
                     ) : searchResult.length > 0 ? (
                         searchResult.map((movie, index) => (
                             <div className="movie-card" key={index}>
@@ -84,7 +91,7 @@ const ResultsPage = () => {
                             </div>
                         ))
                     ) : (
-                        <p>No results found.</p> // Show this after loading is complete
+                        <p>No results found.</p>
                     )}
                 </div>
             </section>

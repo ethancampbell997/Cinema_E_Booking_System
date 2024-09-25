@@ -184,6 +184,41 @@ public class MovieAccess {
         } // try
 
     } // getTrailerPic
+
+    public static String getRating(int id) {
+        /* Pre: Movie exists */
+        String sql = "select rating from movies where movie_id=" + Integer.toString(id);
+        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
+        String username = "cameran";
+        String password = "Candawg34!";
+        Statement st = null;
+        ResultSet rs = null;
+
+        try {
+            Connection con = DriverManager.getConnection(url, username, password);
+            if (con == null) {
+                return "ERR";
+
+            } // if
+
+            st = con.createStatement();
+            if (st == null) {
+                return "ERR";
+
+            } // if
+
+            rs = st.executeQuery(sql);
+            rs.next();
+            String rating = rs.getString(1);
+            return rating;
+
+        } catch (SQLException e) {
+            return "ERR";
+
+        } // try
+
+    } // getStatus
+
     public static ArrayList<MovieObject> getAllMovies() {
         String sql = "SELECT * FROM movies";
         String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
@@ -211,8 +246,11 @@ public class MovieAccess {
                 String status = rs.getString("status");
                 String trailerLink = rs.getString("trailer_link");
                 String trailerPic = rs.getString("trailer_pic");
+                String rating = rs.getString("rating");
 
-                MovieObject movie = new MovieObject(id, title, status, trailerLink, trailerPic);
+                System.out.println("ID: " + id + ", Title: " + title + ", Rating: " + rating);
+
+                MovieObject movie = new MovieObject(id, title, status, trailerLink, trailerPic, rating);
                 movies.add(movie);
             }
         } catch (SQLException e) {

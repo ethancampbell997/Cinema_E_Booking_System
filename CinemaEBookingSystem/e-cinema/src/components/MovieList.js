@@ -28,26 +28,29 @@ const MovieList = ({ title, movies = [], loading }) => {
           movies.map((movie, index) => (
             <div className="movie-card" key={index}>
               <Link to={`/movie/${movie.id}`} style={{ textDecoration: 'none' }}>
-                <div className="poster-container">
-                  <img
-                    src={movie.trailerPic || '/default-poster.jpg'} 
-                    alt={movie.title || "Unknown Title"}
-                    className="movie-poster"
-                  />
-                  <div className="highlight-overlay"></div>
+                <div className="poster-title">
+                  <div className="poster-container">
+                    <img
+                      src={movie.trailerPic || '/default-poster.jpg'} 
+                      alt={movie.title || "Unknown Title"}
+                      className="movie-poster"
+                    />
+                    <div className="highlight-overlay"></div>
+                  </div>
+                  <h4>{movie.title || "Unknown Title"}</h4>
                 </div>
-                <h4>{movie.title || "Unknown Title"}</h4>
               </Link>
               {title === "Now Playing" && (
                 <div className="movie-info">
-                  { /* <p>{movie.rating}</p> */ }
+                  <p>{movie.rating}</p>
                   <button className="watch-trailer" onClick={() => handleWatchTrailer(movie.trailerLink)}>
                     Watch Trailer
                   </button>
                 </div>
               )}
               {title === "Coming Soon" && (
-                <div className="coming-soon">
+                <div className="movie-info">
+                  <p>{movie.rating}</p>
                   <button className="watch-trailer" onClick={() => handleWatchTrailer(movie.trailerLink)}>
                     Watch Trailer
                   </button>

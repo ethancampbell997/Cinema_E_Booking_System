@@ -26,6 +26,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin-top: 2px;
 }
 
 .movie-card img {
@@ -50,7 +51,7 @@
     transition: transform 0.3s ease;
 }
   
-.movie-card:hover .movie-poster {
+.poster-title:hover .movie-poster {
     transform: scale(1.05);
 }
   
@@ -65,7 +66,7 @@
     transition: opacity 0.3s ease;
 }
   
-.movie-card:hover .highlight-overlay {
+.poster-title:hover .highlight-overlay {
     opacity: 1;
 }
 
@@ -89,4 +90,5 @@
 
 .movie-card p {
     color: #FFC685;
+    margin: 0;
 }
