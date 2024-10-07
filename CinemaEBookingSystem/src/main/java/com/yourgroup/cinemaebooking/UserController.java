@@ -10,6 +10,7 @@ public class UserController {
   @PostMapping
   public void createUser(@RequestBody NewUser user) {
     System.out.println("here2");
+    user.hashPassword();
     UserAccess.saveUser(user);
   } // createUser
 

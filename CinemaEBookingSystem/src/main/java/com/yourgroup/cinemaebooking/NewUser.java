@@ -15,6 +15,12 @@ public class NewUser {
   private String state;
   private String zip;
 
+  public void hashPassword() {
+
+    setPassword(PasswordUtility.hashPass(this.password));
+
+  } // hashPassword
+
   public String toString() {
     String string = "'" + name + "'" + ", ";
     string += "'" + email + "'" + ", ";
