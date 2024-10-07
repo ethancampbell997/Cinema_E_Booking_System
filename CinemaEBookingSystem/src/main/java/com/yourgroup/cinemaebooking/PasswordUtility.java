@@ -10,4 +10,10 @@ public class PasswordUtility {
 
   } // hashPass
 
+  public static boolean verifyPass(String pass, String hashedPass) {
+
+    return BCrypt.checkpw(pass, hashedPass);
+
+  } // verifyPass
+
 } // PasswordUtility
