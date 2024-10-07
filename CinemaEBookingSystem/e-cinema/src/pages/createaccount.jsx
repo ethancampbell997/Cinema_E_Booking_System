@@ -27,7 +27,7 @@ export function CreateAccount() {
       e.preventDefault(); // Prevent default form submission
   
       try {
-        const response = await fetch('http://localhost:8080/', {
+        const response = await fetch('http://localhost:8080/api/users', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

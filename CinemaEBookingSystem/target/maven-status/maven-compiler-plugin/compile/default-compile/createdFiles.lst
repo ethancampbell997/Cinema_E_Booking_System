@@ -1,9 +1,12 @@
-com\yourgroup\cinemaebooking\MovieRequest.class
+com\yourgroup\cinemaebooking\UserAccess.class
 com\yourgroup\cinemaebooking\MovieAccess.class
-com\yourgroup\cinemaebooking\MovieObject.class
+com\yourgroup\cinemaebooking\NewUser.class
 com\yourgroup\cinemaebooking\MovieController.class
 com\yourgroup\cinemaebooking\CinemaEBookingApplication.class
-com\yourgroup\cinemaebooking\db\DBTester.class
 com\yourgroup\WebConfig.class
+com\yourgroup\cinemaebooking\MovieRequest.class
+com\yourgroup\cinemaebooking\MovieObject.class
+com\yourgroup\cinemaebooking\UserController.class
+com\yourgroup\cinemaebooking\db\DBTester.class
 com\yourgroup\cinemaebooking\db\DatabaseConnectionTest.class
 com\yourgroup\cinemaebooking\MovieApplication.class
