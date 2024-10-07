@@ -1,6 +1,6 @@
 import "../styles.css"
 import Navbar from "../components/Navbar"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import React, { useState } from 'react';
 export function CreateAccount() {
     const [formData, setFormData] =useState({
@@ -16,6 +16,7 @@ export function CreateAccount() {
       state: '',
       zip: ''
     });
+    const navigate = useNavigate();
     const handleChange = (e)=> {
       const {id, value} = e.target;
       setFormData({
@@ -36,8 +37,8 @@ export function CreateAccount() {
         });
   
         if (response.ok) {
-          const data = await response.json();
-          console.log('Account created:', data);
+          console.log('Account created')
+          navigate('/regcon');
         } else {
           console.error('Error:', response.statusText);
         }
