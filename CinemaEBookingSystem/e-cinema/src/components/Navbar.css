@@ -8,7 +8,6 @@
     flex-wrap: wrap;
     max-width: 100%;
     width: 100%;
-    overflow-x: hidden;
     background: linear-gradient(to bottom, rgb(15, 15, 15), rgba(0, 0, 0, 0.3));
     z-index: 10;
 }
@@ -113,4 +112,49 @@
 
 .sign-up:hover {
     background-color: #ffb340;
+}
+
+.avatar {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    overflow: hidden;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background-color: #f0f0f0;
+}
+
+.avatar-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 50px; 
+    right: 0; 
+    background-color: white; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000; 
+    width: 150px;
+}
+
+.dropdown-item {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    color: black;
+    display: block;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.logout {
+    margin-left: 8px;
+    margin-bottom: 5px;
+    border-width: 1px;
 }

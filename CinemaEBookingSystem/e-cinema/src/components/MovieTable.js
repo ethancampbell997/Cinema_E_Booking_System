@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MovieTable = ({ movies }) => (
+const MovieTable = ({ movies = [] }) => (
   <table>
     <thead>
       <tr>

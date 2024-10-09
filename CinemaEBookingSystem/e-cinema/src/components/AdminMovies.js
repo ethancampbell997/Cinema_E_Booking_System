@@ -3,16 +3,15 @@ import { Link } from 'react-router-dom';
 
 import Breadcrumb from './Breadcrumb';
 import MovieTable from './MovieTable';
-import { allMoviesWithStatus } from '../App';
 
 import './Admin.css'; 
 import './Breadcrumb.css';
 
-const AdminMovies = ( movie ) => {
+const AdminMovies = ({ allMovies = [] }) => {
   const handleAdd = (id) => {
     console.log(`Updating movie with ID: ${id}`);
   };
-
+  
   return (
     <div className="admin-container">
       <div className="admin-sidebar">
@@ -36,8 +35,8 @@ const AdminMovies = ( movie ) => {
         </div>
         <div className="admin-body">
           <Breadcrumb />
-          <MovieTable movies={allMoviesWithStatus} />
-          <button className="add" onClick={() => handleAdd(movie.id)}>Add new movie</button>
+          <MovieTable movies={allMovies} />
+          <button className="add" onClick={() => handleAdd}>Add new movie</button>
         </div>
       </div>
     </div>
