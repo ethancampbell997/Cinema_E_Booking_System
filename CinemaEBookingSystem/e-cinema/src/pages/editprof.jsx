@@ -9,14 +9,8 @@ export function EditProf() {
     <label for="name">Name: </label>
     <input type="text" id="name" placeholder="John Doe"></input><br></br>
 
-    <label for="username">Username: </label>
-    <input type="text" id="username" placeholder="A Cool Username"></input><br></br>
-
     <label for="password">Password: </label>
     <input type="password" id="password" placeholder="Your Password"></input><br></br>
-
-    <label for="email">Email: </label>
-    <input type="email" id="email" placeholder="youremail@gmail.com"></input><br></br>
 
     <label for="phone">Phone Number: </label>
     <input type="tel" id="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"></input><br></br>

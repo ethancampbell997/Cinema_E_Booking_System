@@ -11,7 +11,7 @@ const Navbar = () => {
     const currentPath = location.pathname;
     const [searchTerm, setSearchTerm] = useState("");
 
-    const [isLoggedIn, setIsLoggedIn] = useState(true); // Toggle logged in state here
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // Toggle logged in state here
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const dropdownRef = useRef(null);
     const avatarRef = useRef(null);
@@ -86,7 +86,7 @@ const Navbar = () => {
                         </div>
                         {dropdownVisible && (
                             <div className="dropdown-menu" ref={dropdownRef}>
-                                <Link to="/profile" className="dropdown-item">Profile</Link>
+                                <Link to="/editprof" className="dropdown-item">Profile</Link>
                                 <button className="logout" onClick={handleLogout}>Logout</button>
                             </div>
                         )}
