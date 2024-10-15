@@ -14,7 +14,8 @@ export function CreateAccount() {
       street: '',
       city: '',
       state: '',
-      zip: ''
+      zip: '',
+      promotion: ''
     });
     const navigate = useNavigate();
     const handleChange = (e)=> {
@@ -92,7 +93,8 @@ export function CreateAccount() {
     <label for="zip">Zip Code: </label>
     <input onChange={handleChange} type="text" id="zip" placeholder="30602"></input><br></br><br></br><br></br>
 
-    
+    <label for="promotion">Register for Promotions</label>
+    <input onChange={handleChange} type="checkbox" id="promotion"></input><br></br>
 
 
     <input className="FinishButton" type="reset"></input>
