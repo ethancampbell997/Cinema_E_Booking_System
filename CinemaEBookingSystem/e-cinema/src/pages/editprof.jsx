@@ -1,4 +1,6 @@
 import "../styles.css"
+import { Link } from "react-router-dom"
+import React, { useState } from 'react';
 import Navbar from "../components/Navbar"
 export function EditProf() {
     return <>
@@ -8,9 +10,6 @@ export function EditProf() {
     <form method="POST">
     <label for="name">Name: </label>
     <input type="text" id="name" placeholder="John Doe"></input><br></br>
-
-    <label for="password">Password: </label>
-    <input type="password" id="password" placeholder="Your Password"></input><br></br>
 
     <label for="phone">Phone Number: </label>
     <input type="tel" id="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"></input><br></br>
@@ -43,6 +42,7 @@ export function EditProf() {
 
     <input className="FinishButton" type="submit"></input>
   </form>
+  <button className="sign-in"><Link to="/changepassword">Change Password</Link></button>
   </div>
   </>
 }
