@@ -68,6 +68,7 @@ export function CreateAccount() {
     <h4>Payment Info (optional)</h4>
     <label for="payment">Card Type: </label>
     <select id="payment" onChange={handleChange}>
+      <option value="" disabled selected hidden>Select Card Type</option>
       <option value="Visa">Visa</option>
       <option value="MasterCard">MasterCard</option>
       <option value="Discover">Discover</option>
