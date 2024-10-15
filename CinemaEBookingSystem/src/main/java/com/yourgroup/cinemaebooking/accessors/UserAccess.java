@@ -1,4 +1,4 @@
-package com.yourgroup.cinemaebooking;
+package com.yourgroup.cinemaebooking.accessors;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.lang.Class;
 import java.util.*;
+
+import com.yourgroup.cinemaebooking.NewUser;
 
 public class UserAccess {
 

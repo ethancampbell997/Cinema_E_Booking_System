@@ -1,5 +1,7 @@
 package com.yourgroup.cinemaebooking;
 
+import com.yourgroup.cinemaebooking.accessors.MovieAccess;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 

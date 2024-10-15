@@ -1,6 +1,10 @@
-package com.yourgroup.cinemaebooking;
+package com.yourgroup.cinemaebooking.controllers;
 
 import org.springframework.web.bind.annotation.*;
+
+import com.yourgroup.cinemaebooking.MovieObject;
+import com.yourgroup.cinemaebooking.accessors.MovieAccess;
+
 import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
