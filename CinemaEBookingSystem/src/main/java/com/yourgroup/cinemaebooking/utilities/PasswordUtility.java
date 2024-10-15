@@ -1,4 +1,4 @@
-package com.yourgroup.cinemaebooking;
+package com.yourgroup.cinemaebooking.utilities;
 
 import org.mindrot.jbcrypt.BCrypt;
 

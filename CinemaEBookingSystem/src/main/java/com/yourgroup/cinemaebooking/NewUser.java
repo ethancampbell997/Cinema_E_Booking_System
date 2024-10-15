@@ -1,5 +1,7 @@
 package com.yourgroup.cinemaebooking;
 
+import com.yourgroup.cinemaebooking.utilities.PasswordUtility;
+
 public class NewUser {
 
   private String name;
@@ -42,6 +44,7 @@ public class NewUser {
         (cardNumber == null) ||
         cardNumber.isEmpty() ||
         (expiration == null)) {
+
       return "";
     
     } // if
@@ -155,4 +158,5 @@ public class NewUser {
   public void setZip(String zip) {
     this.zip = zip;
   }
+
 } // User

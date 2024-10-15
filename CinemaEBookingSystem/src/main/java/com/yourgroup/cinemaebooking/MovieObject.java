@@ -41,7 +41,6 @@ public class MovieObject {
             trailerLink = "ERR";
             trailerPic = "ERR";
             rating = "ERR";
-
         } else if (id == 0) {
             /* Movie with title t does not exist */
             title = "DNE";
@@ -49,47 +48,39 @@ public class MovieObject {
             trailerLink = "DNE";
             trailerPic = "DNE";
             rating = "DNE";
-
         } else {
             title = t;
             status = MovieAccess.getStatus(id);
             trailerLink = MovieAccess.getTrailerLink(id);
             trailerPic = MovieAccess.getTrailerPic(id);
             rating = MovieAccess.getRating(id);
-
         } // if
 
     } // MovieObject
 
     public String getTitle() {
         return title;
-
     } // getTitle
 
     public String getStatus() {
         return status;
-
     } // getStatus
 
     public String getTrailerLink() {
         return trailerLink;
-
     } // getTrailerLink
 
     public String getTrailerPic() {
         return trailerPic;
-
     } // getTrailerPic
 
     public String getRating() {
         return rating;
-
     } // getRating
 
     public String toString() {
         String temp = title + ", " + status + ", " + trailerLink + ", " + trailerPic + ", " + rating;
         return temp;
-
     } // toString
 
 } // MovieObject
