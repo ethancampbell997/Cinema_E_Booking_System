@@ -16,15 +16,16 @@ export function CreateAccount() {
       city: '',
       state: '',
       zip: '',
-      promotion: ''
+      promotion: false
     });
     const navigate = useNavigate();
     const handleChange = (e)=> {
-      const {id, value} = e.target;
+      const {id, type, checked, value} = e.target;
       setFormData({
         ...formData, 
-        [id]: value
+        [id]: type === 'checkbox' ? checked : value
       });
+      console.log(`Updated ${id}: ${type === 'checkbox' ? checked : value}`);
     };
     const handleSubmit = async (e) => {
       e.preventDefault(); // Prevent default form submission
@@ -98,7 +99,7 @@ export function CreateAccount() {
     <input onChange={handleChange} type="text" id="zip" placeholder="30602"></input><br></br><br></br><br></br>
 
     <label for="promotion">Register for Promotions</label>
-    <input onChange={handleChange} type="checkbox" id="promotion"></input><br></br>
+    <input onChange={handleChange} type="checkbox" id="promotion" checked={formData.promotion}></input><br></br>
 
 
     <input className="FinishButton" type="reset"></input>

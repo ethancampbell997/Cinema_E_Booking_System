@@ -12,13 +12,13 @@ import com.yourgroup.cinemaebooking.NewUser;
 
 public class UserAccess {
 
+  private static String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
+  private static String username = "cameran";
+  private static String password = "Candawg34!";
+
   public static int saveUser(NewUser user) {
-    String sql = "INSERT INTO users (full_name, email, password, phone, street, city, state, zip, role) VALUES (";
-    sql += user.toString();
-    sql += ")";
-    String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
-    String username = "cameran";
-    String password = "Candawg34!";
+    String sql = "INSERT INTO users (full_name, email, password, phone, street, city, state, zip, role, promotional_opt_in) VALUES (";
+    sql += (user.toString() + ")");
     Statement st = null;
 
     try {

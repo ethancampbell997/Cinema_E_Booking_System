@@ -11,12 +11,12 @@ import java.util.*;
 import com.yourgroup.cinemaebooking.MovieObject;
 
 public class MovieAccess {
+    private static String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
+    private static String username = "cameran";
+    private static String password = "Candawg34!";
     
     public static int getID(String title) {
         String sql = "select movie_id from movies where title='" + title + "'";
-        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
-        String username = "cameran";
-        String password = "Candawg34!";
         Statement st = null;
         ResultSet rs = null;
 
@@ -24,13 +24,11 @@ public class MovieAccess {
             Connection con = DriverManager.getConnection(url, username, password);
             if (con == null) {
                 return -1;
-
             } // if
 
             st = con.createStatement();
             if (st == null) {
                 return -1;
-
             } // if
 
             rs = st.executeQuery(sql);
@@ -38,12 +36,10 @@ public class MovieAccess {
                 /* Movie exists */
                 int i = rs.getInt(1);
                 return i;
-
             } // if
 
         } catch (SQLException e) {
             return -1;
-
         } // try
         
         return 0; // Movie does not exist
@@ -53,24 +49,19 @@ public class MovieAccess {
     public static String getTitle(int id) throws Exception {
         /* Pre: Movie exists */
         String sql = "select title from movies where movie_id=" + Integer.toString(id);
-        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
-        String username = "cameran";
-        String password = "Candawg34!";
         Statement st = null;
         ResultSet rs = null;
 
-        //try {
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, username, password);
             if (con == null) {
-                return "ERR1";
-
+                return "ERR";
             } // if
 
             st = con.createStatement();
             if (st == null) {
-                return "ERR2";
-
+                return "ERR";
             } // if
 
             rs = st.executeQuery(sql);
@@ -78,19 +69,15 @@ public class MovieAccess {
             String title = rs.getString(1);
             return title;
 
-        //} catch (SQLException e) {
-        //    return "ERR3";
-
-        //} // try
+        } catch (SQLException e) {
+            return "ERR";
+        } // try
 
     } // getTitle
     
     public static String getStatus(int id) {
         /* Pre: Movie exists */
         String sql = "select status from movies where movie_id=" + Integer.toString(id);
-        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
-        String username = "cameran";
-        String password = "Candawg34!";
         Statement st = null;
         ResultSet rs = null;
 
@@ -98,13 +85,11 @@ public class MovieAccess {
             Connection con = DriverManager.getConnection(url, username, password);
             if (con == null) {
                 return "ERR";
-
             } // if
 
             st = con.createStatement();
             if (st == null) {
                 return "ERR";
-
             } // if
 
             rs = st.executeQuery(sql);
@@ -114,7 +99,6 @@ public class MovieAccess {
 
         } catch (SQLException e) {
             return "ERR";
-
         } // try
 
     } // getStatus
@@ -122,9 +106,6 @@ public class MovieAccess {
     public static String getTrailerLink(int id) {
         /* Pre: Movie exists */
         String sql = "select trailer_link from movies where movie_id=" + Integer.toString(id);
-        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
-        String username = "cameran";
-        String password = "Candawg34!";
         Statement st = null;
         ResultSet rs = null;
 
@@ -132,13 +113,11 @@ public class MovieAccess {
             Connection con = DriverManager.getConnection(url, username, password);
             if (con == null) {
                 return "ERR";
-
             } // if
 
             st = con.createStatement();
             if (st == null) {
                 return "ERR";
-
             } // if
 
             rs = st.executeQuery(sql);
@@ -148,7 +127,6 @@ public class MovieAccess {
 
         } catch (SQLException e) {
             return "ERR";
-
         } // try
 
     } // getTrailerLink
@@ -156,9 +134,6 @@ public class MovieAccess {
     public static String getTrailerPic(int id) {
         /* Pre: Movie exists */
         String sql = "select trailer_pic from movies where movie_id=" + Integer.toString(id);
-        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
-        String username = "cameran";
-        String password = "Candawg34!";
         Statement st = null;
         ResultSet rs = null;
 
@@ -166,13 +141,11 @@ public class MovieAccess {
             Connection con = DriverManager.getConnection(url, username, password);
             if (con == null) {
                 return "ERR";
-
             } // if
 
             st = con.createStatement();
             if (st == null) {
                 return "ERR";
-
             } // if
 
             rs = st.executeQuery(sql);
@@ -182,7 +155,6 @@ public class MovieAccess {
 
         } catch (SQLException e) {
             return "ERR";
-
         } // try
 
     } // getTrailerPic
@@ -190,9 +162,6 @@ public class MovieAccess {
     public static String getRating(int id) {
         /* Pre: Movie exists */
         String sql = "select rating from movies where movie_id=" + Integer.toString(id);
-        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
-        String username = "cameran";
-        String password = "Candawg34!";
         Statement st = null;
         ResultSet rs = null;
 
@@ -200,13 +169,11 @@ public class MovieAccess {
             Connection con = DriverManager.getConnection(url, username, password);
             if (con == null) {
                 return "ERR";
-
             } // if
 
             st = con.createStatement();
             if (st == null) {
                 return "ERR";
-
             } // if
 
             rs = st.executeQuery(sql);
@@ -216,16 +183,12 @@ public class MovieAccess {
 
         } catch (SQLException e) {
             return "ERR";
-
         } // try
 
     } // getStatus
 
     public static ArrayList<MovieObject> getAllMovies() {
         String sql = "SELECT * FROM movies";
-        String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
-        String username = "cameran";
-        String password = "Candawg34!";
         Statement st = null;
         ResultSet rs = null;
         ArrayList<MovieObject> movies = new ArrayList<>();
