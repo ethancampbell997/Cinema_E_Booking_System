@@ -24,6 +24,7 @@ import { Book } from "./pages/book";
 import { OrderSummary } from "./pages/ordersummary";
 import { Checkout } from "./pages/checkout";
 import { OrderConfirmation } from "./pages/ordercon";
+import { ForgotPassword } from './pages/forgotpassword';
 
 function App() {
   const location = useLocation();
@@ -75,6 +76,7 @@ function App() {
               <Route path="/ordersummary" element={<OrderSummary/>}/>
               <Route path="/checkout" element={<Checkout/>}/>
               <Route path="/ordercon" element={<OrderConfirmation/>}/>
+              <Route path="/forgotpassword" element={<ForgotPassword/>}/>
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/admin/movies" element={<AdminMovies allMovies={allMovies} />} />
                 <Route path="/admin/users" element={<Admin />} />

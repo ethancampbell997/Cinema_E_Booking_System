@@ -40,11 +40,11 @@ export const LogIn = ({ setIsLoggedIn }) => {
             <span>New User? Sign up </span>
             <Link className="linkk" to="/createaccount">here!</Link>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username: </label>
+                <label htmlFor="username">Email: </label>
                 <input
                     type="text"
                     id="username"
-                    placeholder="Your Username"
+                    placeholder="Your Email"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
@@ -63,6 +63,7 @@ export const LogIn = ({ setIsLoggedIn }) => {
                 <input className="FinishButton" type="submit" value="Log In" />
                 {error && <p style={{ color: 'red' }}>{error}</p>}
             </form>
+            <button className="sign-in"><Link to="/forgotpassword">Forgot Password</Link></button>
         </div>
     );
 }
