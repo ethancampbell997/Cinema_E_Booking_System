@@ -11,6 +11,7 @@ export function CreateAccount() {
       cardType: '',
       cardNumber: '',
       expiration: '',
+      cvc: '',
       street: '',
       city: '',
       state: '',
@@ -83,6 +84,9 @@ export function CreateAccount() {
     <label for="expiration">Expiration Date: </label>
     <input onChange={handleChange} type="text" id="expiration" placeholder="12/2024" pattern="[0-1][0-9]/[0-9]{4}"></input><br></br>
    
+    <label for="cvc">CVC: </label>
+    <input onChange={handleChange} type="text" id="cvc" placeholder="123"></input><br></br>
+
     <h4>Address (optional)</h4>
     <label for="street">Street: </label>
     <input onChange={handleChange} type="text" id="street" placeholder="790 S Lumpkin St"></input><br></br>
