@@ -1,6 +1,6 @@
 package com.yourgroup.cinemaebooking;
 
-import com.yourgroup.cinemaebooking.utilities.PasswordUtility;
+import com.yourgroup.cinemaebooking.utilities.*;
 
 public class NewUser {
 
@@ -47,6 +47,13 @@ public class NewUser {
     return string;
 
   } // toString
+
+  public void encryptCard() {
+    if ((!(cardNumber == null)) && (!(cardNumber.isEmpty()))) {
+      cardNumber = CardUtility.encryptCreditCard(cardNumber);
+      System.out.println(cardNumber);
+    } // if
+  } // encryptCard
 
   public String cardToString() {
     System.out.println(payment);

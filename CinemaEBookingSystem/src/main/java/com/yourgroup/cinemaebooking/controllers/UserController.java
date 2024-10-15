@@ -15,6 +15,7 @@ public class UserController {
     System.out.println("here2");
     user.hashPassword();
     user.fixDate();
+    user.encryptCard();
     UserAccess.saveUser(user);
   } // createUser
 
