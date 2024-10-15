@@ -38,7 +38,9 @@ public class NewUser {
   public String cardToString() {
     System.out.println(payment);
     if ((payment == null) ||
-        cardNumber.equalsIgnoreCase("") ||
+        payment.isEmpty() ||
+        (cardNumber == null) ||
+        cardNumber.isEmpty() ||
         (expiration == null)) {
       return "";
     
@@ -53,7 +55,9 @@ public class NewUser {
   } // cardToString
 
   public void fixDate() {
-    this.expiration = convertDate(expiration);
+    if ((this.expiration != null) && !(this.expiration.isEmpty())) {
+      this.expiration = convertDate(expiration);
+    } // if
   } // fixDate
 
   private String convertDate(String temp) {

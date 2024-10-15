@@ -35,7 +35,7 @@ public class UserAccess {
 
       st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
 
-      if (!user.cardToString().equalsIgnoreCase("")) {
+      if (!(user.cardToString().isEmpty())) {
         generatedKeys = st.getGeneratedKeys();
         int userId = 0;
         if (generatedKeys.next()) {
