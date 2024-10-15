@@ -71,3 +71,9 @@ input{
   padding-right: 150px;
   height: 94vh;
 }
+#payment{
+  color: black;
+}
+option {
+  color: black;
+}
