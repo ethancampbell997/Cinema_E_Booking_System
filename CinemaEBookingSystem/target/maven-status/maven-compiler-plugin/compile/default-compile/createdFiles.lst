@@ -1,7 +1,9 @@
 com\yourgroup\cinemaebooking\UserAccess.class
 com\yourgroup\cinemaebooking\MovieAccess.class
 com\yourgroup\cinemaebooking\NewUser.class
+com\yourgroup\cinemaebooking\PasswordUtility.class
 com\yourgroup\cinemaebooking\MovieController.class
+com\yourgroup\cinemaebooking\LogInController.class
 com\yourgroup\cinemaebooking\CinemaEBookingApplication.class
 com\yourgroup\WebConfig.class
 com\yourgroup\cinemaebooking\MovieRequest.class

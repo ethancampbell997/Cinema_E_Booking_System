@@ -1,13 +1,12 @@
 package com.yourgroup.cinemaebooking;
 
-
 public class NewUser {
 
   private String name;
   private String email;
   private String password;
   private String phone;
-  private String cardType;
+  private String payment;
   private String cardNumber;
   private String expiration;
   private String street;
@@ -22,19 +21,48 @@ public class NewUser {
   } // hashPassword
 
   public String toString() {
-    String string = "'" + name + "'" + ", ";
-    string += "'" + email + "'" + ", ";
-    string += "'" + password + "'" + ", ";
-    string += "'" + phone + "'" + ", ";
-    string += "'" + street + "'" + ", ";
-    string += "'" + city + "'" + ", ";
-    string += "'" + state + "'" + ", ";
-    string += "'" + zip + "'" + ", ";
-    string += "'" + "User" + "'";
+    String string = "'" + name + "', ";
+    string += "'" + email + "', ";
+    string += "'" + password + "', ";
+    string += "'" + phone + "', ";
+    string += "'" + street + "', ";
+    string += "'" + city + "', ";
+    string += "'" + state + "', ";
+    string += "'" + zip + "', ";
+    string += "'User'";
 
     return string;
 
   } // toString
+
+  public String cardToString() {
+    System.out.println(payment);
+    if ((payment == null) ||
+        cardNumber.equalsIgnoreCase("") ||
+        (expiration == null)) {
+      return "";
+    
+    } // if
+
+    String string = "'" + payment + "', ";
+    string += "'" + cardNumber + "', ";
+    string += "'" + expiration + "', ";
+    
+    return string;
+
+  } // cardToString
+
+  public void fixDate() {
+    this.expiration = convertDate(expiration);
+  } // fixDate
+
+  private String convertDate(String temp) {
+    String month = temp.substring(0, 2);
+    String year = temp.substring(3);
+    System.out.println("date = " + year + "-" + month + "-01");
+    return (year + "-" + month + "-01");
+
+  } // convertDate
 
   public String getName() {
     return name;
@@ -68,12 +96,12 @@ public class NewUser {
     this.phone = phone;
   }
 
-  public String getCardType() {
-    return cardType;
+  public String getPayment() {
+    return payment;
   }
 
-  public void setCardType(String cardType) {
-    this.cardType = cardType;
+  public void setPayment(String payment) {
+    this.payment = payment;
   }
 
   public String getCardNumber() {

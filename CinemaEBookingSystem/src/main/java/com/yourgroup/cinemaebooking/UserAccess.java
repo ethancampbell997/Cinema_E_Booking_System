@@ -21,6 +21,7 @@ public class UserAccess {
 
     try {
       Connection con = DriverManager.getConnection(url, username, password);
+      ResultSet generatedKeys = null;
       if (con == null) {
         return -1;            
       } // if
@@ -30,7 +31,29 @@ public class UserAccess {
         return -1;
       } // if
 
-      st.executeUpdate(sql);
+      st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+
+      if (!user.cardToString().equalsIgnoreCase("")) {
+        generatedKeys = st.getGeneratedKeys();
+        int userId = 0;
+        if (generatedKeys.next()) {
+          userId = generatedKeys.getInt(1);
+
+        } // if
+        
+        String cardSql = "INSERT INTO cards (card_type, card_number, expiration_date, user_id) VALUES (";
+        cardSql += user.cardToString();
+        cardSql += "'" + userId + "'";
+        cardSql += ")";
+
+        st = con.createStatement();
+        if (st == null) {
+          return -1;
+        } // if
+
+        st.executeUpdate(cardSql);
+
+      } // if
       
     } catch (SQLException e) {
       e.printStackTrace();

@@ -11,6 +11,7 @@ public class UserController {
   public void createUser(@RequestBody NewUser user) {
     System.out.println("here2");
     user.hashPassword();
+    user.fixDate();
     UserAccess.saveUser(user);
   } // createUser
 
