@@ -15,6 +15,7 @@ public class NewUser {
   private String city;
   private String state;
   private String zip;
+  private boolean promotion;
 
   public void hashPassword() {
 
@@ -23,6 +24,7 @@ public class NewUser {
   } // hashPassword
 
   public String toString() {
+
     String string = "'" + name + "', ";
     string += "'" + email + "', ";
     string += "'" + password + "', ";
@@ -31,7 +33,16 @@ public class NewUser {
     string += "'" + city + "', ";
     string += "'" + state + "', ";
     string += "'" + zip + "', ";
-    string += "'User'";
+    string += "'User', ";
+
+    String promoAsInt = "";
+    if (promotion) {
+      promoAsInt = "1";
+    } else {
+      promoAsInt = "0";
+    } // if
+
+    string += "'" + promoAsInt + "'";
 
     return string;
 
@@ -157,6 +168,14 @@ public class NewUser {
 
   public void setZip(String zip) {
     this.zip = zip;
+  }
+
+  public boolean getPromotion() {
+    return promotion;
+  }
+
+  public void setPromotion(boolean wantsPromo) {
+    this.promotion = wantsPromo;
   }
 
 } // User

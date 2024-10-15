@@ -1,7 +1,6 @@
 com\yourgroup\cinemaebooking\controllers\LogInController.class
 com\yourgroup\cinemaebooking\controllers\MovieRequest.class
 com\yourgroup\cinemaebooking\NewUser.class
-com\yourgroup\cinemaebooking\PasswordUtility.class
 com\yourgroup\cinemaebooking\accessors\MovieAccess.class
 com\yourgroup\cinemaebooking\CinemaEBookingApplication.class
 com\yourgroup\WebConfig.class
@@ -10,3 +9,4 @@ com\yourgroup\cinemaebooking\MovieObject.class
 com\yourgroup\cinemaebooking\accessors\UserAccess.class
 com\yourgroup\cinemaebooking\controllers\UserController.class
 com\yourgroup\cinemaebooking\MovieApplication.class
+com\yourgroup\cinemaebooking\utilities\PasswordUtility.class

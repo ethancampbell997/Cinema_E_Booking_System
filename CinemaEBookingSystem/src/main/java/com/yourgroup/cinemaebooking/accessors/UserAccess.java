@@ -17,7 +17,7 @@ public class UserAccess {
   private static String password = "Candawg34!";
 
   public static int saveUser(NewUser user) {
-    String sql = "INSERT INTO users (full_name, email, password, phone, street, city, state, zip, role) VALUES (";
+    String sql = "INSERT INTO users (full_name, email, password, phone, street, city, state, zip, role, promotional_opt_in) VALUES (";
     sql += (user.toString() + ")");
     Statement st = null;
 
