@@ -69,7 +69,9 @@ input{
 .wholepage{
   padding-left: 150px;
   padding-right: 150px;
-  height: 94vh;
+  min-height: 94vh;
+  height: auto; 
+  overflow-y: auto;
 }
 #payment{
   color: black;
