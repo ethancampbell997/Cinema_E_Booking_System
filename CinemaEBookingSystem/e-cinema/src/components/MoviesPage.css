@@ -43,3 +43,85 @@
   font-size: 18px;
   margin-top: 10px;
 }
+
+.filter-box {
+  text-align: left;
+}
+
+.filter-box h4 {
+  color: #000; 
+  margin: 0 0 5px 0;
+}
+
+.filter-box label {
+  color: #000; 
+}
+
+.filter-container {
+  position: relative;
+}
+
+.filter-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.filter-box {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; 
+  right: 7%;
+}
+
+.filter-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.dropdown-label {
+  display: flex;
+  flex-grow: 1; 
+  cursor: pointer;
+}
+
+.arrow {
+  color: #000000;
+  width: 8px; 
+  height: 8px; 
+  border: solid #000; 
+  border-width: 0 2px 2px 0; 
+  transform: rotate(225deg); 
+  margin-left: 8px;
+  transition: transform 0.1s; 
+}
+
+.arrow.open {
+  transform: rotate(405deg); 
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-content label {
+  margin-bottom: 4px;
+}
+
+.clear-filters {
+  background-color: white; 
+  color: black;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  margin-top: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
