@@ -11,7 +11,7 @@ const Navbar = () => {
     const currentPath = location.pathname;
     const [searchTerm, setSearchTerm] = useState("");
 
-    const [isLoggedIn, setIsLoggedIn] = useState(true); // Toggle logged in state here
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // Toggle logged in state here
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const dropdownRef = useRef(null);
     const avatarRef = useRef(null);
