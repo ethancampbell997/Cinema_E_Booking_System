@@ -7,6 +7,7 @@ com\yourgroup\cinemaebooking\CinemaEBookingApplication.class
 com\yourgroup\WebConfig.class
 com\yourgroup\cinemaebooking\controllers\MovieController.class
 com\yourgroup\cinemaebooking\MovieObject.class
+com\yourgroup\cinemaebooking\LoggedInUser.class
 com\yourgroup\cinemaebooking\accessors\UserAccess.class
 com\yourgroup\cinemaebooking\controllers\UserController.class
 com\yourgroup\cinemaebooking\MovieApplication.class

@@ -1,5 +1,8 @@
 package com.yourgroup.cinemaebooking.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,16 +16,23 @@ import com.yourgroup.cinemaebooking.utilities.PasswordUtility;
 public class LogInController {
 
     @PostMapping
-    public ResponseEntity<String> login(@RequestBody NewUser user) {
+    public ResponseEntity<Map<String, Object>> login(@RequestBody NewUser user) {
       String username = user.getEmail(); 
       String password = user.getPassword();
 
       boolean isValidUser = validateUser(username, password);
 
         if (isValidUser) {
-            return ResponseEntity.ok("Login successful");
+          Map<String, Object> response = new HashMap<>();
+          response.put("message", "Login successful");
+          response.put("isLoggedIn", true);
+          response.put("username", username);
+          return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.status(401).body("Invalid username or password");
+          Map<String, Object> response = new HashMap<>();
+          response.put("message", "Invalid username or password");
+          response.put("isLoggedIn", false);
+          return ResponseEntity.status(401).body(response);
         }
 
       // return ResponseEntity.ok("Login successful");
