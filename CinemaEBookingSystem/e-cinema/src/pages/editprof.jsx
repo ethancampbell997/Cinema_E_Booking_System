@@ -61,12 +61,32 @@ export function EditProf() {
     setUserData(prevState => ({ ...prevState, cards: newCards }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch('http://localhost:8080/api/user/profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        // Handle success (e.g., show a success message, redirect, etc.)
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        // Handle error (e.g., show an error message)
+      });
+  };
+
   return (
     <>
       <Navbar />
       <div className="wholepage">
         <h1 className="below">Edit Profile</h1>
-        <form method="POST">
+        <form onSubmit={handleSubmit}>
           <label htmlFor="name">Name: </label>
           <input type="text" id="name" value={userData.name} onChange={handleInputChange} /><br />
 

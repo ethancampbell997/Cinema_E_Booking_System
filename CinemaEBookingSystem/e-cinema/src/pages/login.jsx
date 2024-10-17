@@ -1,10 +1,10 @@
-import "../styles.css"
-import { Link } from "react-router-dom"
+import "../styles.css";
+import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const LogIn = ({ setIsLoggedIn }) => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -18,11 +18,11 @@ export const LogIn = ({ setIsLoggedIn }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ email, password }), // Updated to send email
             });
 
             if (!response.ok) {
-                throw new Error('Login failed: Invalid username or password');
+                throw new Error('Login failed: Invalid email or password'); // Updated error message
             }
 
             const data = await response.json();
@@ -40,13 +40,13 @@ export const LogIn = ({ setIsLoggedIn }) => {
             <span>New User? Sign up </span>
             <Link className="linkk" to="/createaccount">here!</Link>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Email: </label>
+                <label htmlFor="email">Email: </label>
                 <input
-                    type="text"
-                    id="username"
-                    placeholder="Your Email"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    type="email" // Updated type to 'email' for better validation
+                    id="email" // Updated id
+                    placeholder="Your Email" 
+                    value={email} // Updated to use email
+                    onChange={(e) => setEmail(e.target.value)} // Updated to use setEmail
                     required
                 />
                 <br />
