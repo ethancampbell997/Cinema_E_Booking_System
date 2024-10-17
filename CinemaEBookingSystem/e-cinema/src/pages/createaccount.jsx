@@ -1,5 +1,4 @@
 import "../styles.css"
-import Navbar from "../components/Navbar"
 import { Link, useNavigate } from "react-router-dom"
 import React, { useState } from 'react';
 export function CreateAccount() {
@@ -50,7 +49,7 @@ export function CreateAccount() {
       }
     };
     return <>
-    <Navbar />
+    
     <div className="wholepage">
     <h1 className="below">Create Account</h1>
     <span>Already have an account? Log in </span>

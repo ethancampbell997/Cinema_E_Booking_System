@@ -28,6 +28,8 @@ export const LogIn = ({ setIsLoggedIn }) => {
             const data = await response.json();
             console.log('Login successful:', data);
             setIsLoggedIn(true);
+            sessionStorage.setItem('userEmail', email);
+            alert("You are logged in")
             navigate('/'); 
         } catch (error) {
             setError(error.message);

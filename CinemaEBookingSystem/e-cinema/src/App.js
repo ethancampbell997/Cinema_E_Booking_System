@@ -38,6 +38,10 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    const email = sessionStorage.getItem('userEmail'); // Use sessionStorage
+    if (email) {
+        setIsLoggedIn(true); // User is logged in
+    }
     fetch('http://localhost:8080/movies/all') 
         .then(response => response.json())
         .then(data => {

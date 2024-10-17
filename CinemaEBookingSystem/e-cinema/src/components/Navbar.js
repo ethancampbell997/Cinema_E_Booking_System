@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 
 import Avatar from '../images/avatar-15.png';
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const currentPath = location.pathname;
     const [searchTerm, setSearchTerm] = useState("");
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Toggle logged in state here
+
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const dropdownRef = useRef(null);
     const avatarRef = useRef(null);
@@ -32,6 +32,7 @@ const Navbar = () => {
     
     const handleLogout = () => {
         setIsLoggedIn(false);
+        sessionStorage.removeItem('userEmail'); // Clear email from sessionStorage
         setDropdownVisible(false); 
     };
 
