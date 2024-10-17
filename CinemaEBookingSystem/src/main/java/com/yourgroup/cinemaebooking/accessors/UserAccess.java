@@ -65,4 +65,68 @@ public class UserAccess {
     return 0;
   } // saveUser
 
+  public static int checkForEmail(String email) {
+    String sql = "SELECT * FROM users WHERE email = '" + email + "';";
+    Statement st = null;
+
+    try {
+      Connection con = DriverManager.getConnection(url, username, password);
+
+      if (con == null) {
+        return -1;            
+      } // if
+
+      st = con.createStatement();
+      if (st == null) {
+        return -1;
+      } // if
+
+      ResultSet rs = st.executeQuery(sql);
+      if (rs.next()) {
+        /* Case for if the email is in the database */
+        return 1;
+
+      } // if
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return -1;
+    }
+
+    /* Case for if the email is NOT in the database */
+    return 0;
+
+  } // checkForEmail
+
+  public static String getHashedPass(String email) {
+    String sql = "SELECT password FROM users WHERE email = '" + email + "';";
+    Statement st = null;
+    String hashedPass = null;
+
+    try {
+      Connection con = DriverManager.getConnection(url, username, password);
+
+      if (con == null) {
+        return null;            
+      } // if
+
+      st = con.createStatement();
+      if (st == null) {
+        return null;
+      } // if
+
+      ResultSet rs = st.executeQuery(sql);
+      if (rs.next()) {
+        hashedPass = rs.getString("password");
+      } // if
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+
+    return hashedPass;
+
+  } // getHashedPass
+
 } // UserAccess

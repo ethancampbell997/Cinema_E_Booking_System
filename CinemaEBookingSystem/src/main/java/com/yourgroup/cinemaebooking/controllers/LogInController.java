@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.yourgroup.cinemaebooking.NewUser;
+import com.yourgroup.cinemaebooking.accessors.UserAccess;
+import com.yourgroup.cinemaebooking.utilities.PasswordUtility;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -27,6 +29,18 @@ public class LogInController {
     }
 
     private boolean validateUser(String email, String password) {
-      return false;
+      if (UserAccess.checkForEmail(email) == 1) {
+        System.out.println("Email found in db");
+        if (PasswordUtility.verifyPass(password, UserAccess.getHashedPass(email))) {
+          System.out.println("Password matches");
+          return true;
+        } else {
+          System.out.println("Password does NOT match");
+          return false;
+        } // if
+      } else {
+        System.out.println("Email NOT found in db");
+        return false;
+      } // if
   }
 }
