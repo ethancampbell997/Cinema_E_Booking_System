@@ -129,4 +129,66 @@ public class UserAccess {
 
   } // getHashedPass
 
+  public static int updateProfile(int id, String name, String phone, String street, String city, String state, String zip) {
+    Connection conn = null;
+    Statement st = null;
+
+    try {
+      conn = DriverManager.getConnection(url, username, password);
+      //st = conn.createStatement();
+      String sql = "UPDATE users SET full_name = ?, phone = ?, street = ?, city = ?, state = ?, zip = ? WHERE user_id = ?";
+
+      PreparedStatement ps = conn.prepareStatement(sql);
+      ps.setString(1, name);
+      ps.setString(2, phone);
+      ps.setString(3, street);
+      ps.setString(4, city);
+      ps.setString(5, state);
+      ps.setString(6, zip);
+      ps.setInt(7, id);
+
+      System.out.println("SQL" + sql);
+      int rowsAffected = ps.executeUpdate();
+
+      System.out.println(rowsAffected);
+      System.out.println("Update Complete");
+      return rowsAffected;
+
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+      System.out.println("SQL State" + ex.getSQLState());
+      System.out.println("Error Code" + ex.getErrorCode());
+      System.out.println("Error Message" + ex.getMessage());
+      return -1;
+    }
+  } // updateProfile
+
+  public static int updatePassword(int id, String uPassword) {
+    Connection conn = null;
+    Statement st = null;
+
+    try {
+      conn = DriverManager.getConnection(url, username, password);
+      //st = conn.createStatement();
+      String sql = "UPDATE users SET password = ? WHERE user_id = ?";
+
+      PreparedStatement ps = conn.prepareStatement(sql);
+      ps.setString(1, uPassword);
+      ps.setInt(2, id);
+
+      System.out.println("SQL" + sql);
+      int rowsAffected = ps.executeUpdate();
+
+      System.out.println(rowsAffected);
+      System.out.println("Update Complete");
+      return rowsAffected;
+
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+      System.out.println("SQL State" + ex.getSQLState());
+      System.out.println("Error Code" + ex.getErrorCode());
+      System.out.println("Error Message" + ex.getMessage());
+      return -1;
+    }
+  } // updatePassword
 } // UserAccess
