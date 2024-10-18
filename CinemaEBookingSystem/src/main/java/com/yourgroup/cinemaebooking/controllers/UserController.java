@@ -12,17 +12,24 @@ import com.yourgroup.cinemaebooking.accessors.UserAccess;
 @RequestMapping("/api/users")
 public class UserController {
 
+  @Autowired
   private EmailSenderService emailSenderService;
-  
-  @PostMapping
+
+  @PostMapping()
   public void createUser(@RequestBody NewUser user) {
     System.out.println("here2");
     user.hashPassword();
     user.fixDate();
     user.encryptCard();
     UserAccess.saveUser(user);
-    emailSenderService.sendMail();
-  } // createUser
+    try {
+      emailSenderService.sendEmail("kazemiazad1@gmail.com", "New User Created", "A new user has been created");
+      System.out.println("Email sent successfully");
+    } catch (Exception e) {
+      System.err.println("Failed to send email: " + e.getMessage());
+      e.printStackTrace();
+    }
+  }
 
 @PostMapping("/profile")
   public String returnProfile(@RequestBody LoggedInUser user) {
