@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../styles.css";
-import Navbar from "../components/Navbar";
 
 export function ChangePassword() {
   const [oldPassword, setOldPassword] = useState("");
@@ -58,7 +57,6 @@ export function ChangePassword() {
 
   return (
     <>
-      <Navbar />
       <div className="wholepage">
         <h1 className="below">Change Password</h1>
         <form onSubmit={isVerified ? changePassword : verifyPassword}>

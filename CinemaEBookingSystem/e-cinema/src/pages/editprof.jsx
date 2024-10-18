@@ -1,7 +1,6 @@
 import "../styles.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
-import Navbar from "../components/Navbar";
 
 export function EditProf() {
   const [userData, setUserData] = useState({
@@ -83,7 +82,6 @@ export function EditProf() {
 
   return (
     <>
-      <Navbar />
       <div className="wholepage">
         <h1 className="below">Edit Profile</h1>
         <form onSubmit={handleSubmit}>
