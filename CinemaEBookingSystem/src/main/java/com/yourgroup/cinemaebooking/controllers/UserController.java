@@ -3,6 +3,7 @@ package com.yourgroup.cinemaebooking.controllers;
 import com.yourgroup.cinemaebooking.EmailSenderService;
 import com.yourgroup.cinemaebooking.LoggedInUser;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.yourgroup.cinemaebooking.NewUser;
 import com.yourgroup.cinemaebooking.accessors.UserAccess;
