@@ -11,8 +11,13 @@ import com.yourgroup.cinemaebooking.accessors.UserAccess;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/users")
 public class UserController {
-  
+  @Autowired
   private EmailSenderService emailSenderService;
+
+  @PostMapping("/sendMail")
+  public void sendMail() {
+    emailSenderService.sendEmail("kazemiazad1@gmail.com", "Confirmation", "Confirmation");
+  }
   
   @PostMapping
   public void createUser(@RequestBody NewUser user) {
@@ -21,7 +26,7 @@ public class UserController {
     user.fixDate();
     user.encryptCard();
     UserAccess.saveUser(user);
-    emailSenderService.sendEmail("kazemiazad1@gmail.com", "Confirmation", "Confirmation");
+    sendMail();
   } // createUser
 
 @PostMapping("/profile")
