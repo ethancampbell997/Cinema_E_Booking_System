@@ -151,7 +151,7 @@ public class UserAccess {
       System.out.println("Update Complete");
       return rowsAffected;
 
-    } catch(SQLException ex) {
+    } catch (SQLException ex) {
       ex.printStackTrace();
       System.out.println("SQL State" + ex.getSQLState());
       System.out.println("Error Code" + ex.getErrorCode());
@@ -180,13 +180,13 @@ public class UserAccess {
       System.out.println("Update Complete");
       return rowsAffected;
 
-    } catch(SQLException ex) {
+    } catch (SQLException ex) {
       ex.printStackTrace();
       System.out.println("SQL State" + ex.getSQLState());
       System.out.println("Error Code" + ex.getErrorCode());
       System.out.println("Error Message" + ex.getMessage());
       return -1;
     }
-  } // updateProfile
+  } // updatePassword
 
 } // UserAccess
