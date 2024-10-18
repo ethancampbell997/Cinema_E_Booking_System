@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.yourgroup.cinemaebooking;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,3 +24,30 @@ public class EmailSenderService {
         System.out.println("Email sent");
     }
 }
+=======
+package com.yourgroup.cinemaebooking;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
+
+@Service
+
+public class EmailSenderService {
+    @Autowired
+    private JavaMailSender mailSender;
+
+    public void sendEmail(String to, String subject, String body) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("kazemiazad1@gmail.com");
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(body);
+
+        mailSender.send(message);
+
+        System.out.println("Email sent");
+    }
+}
+>>>>>>> e3aaa28a06abafc14685d730d0d7f57063e9e6d2
