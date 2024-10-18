@@ -1,5 +1,4 @@
 import "../styles.css"
-import Navbar from "../components/Navbar";
 import { useState } from "react"
 export function Book() {
     const [ages, setAges] = useState({});
@@ -25,7 +24,6 @@ export function Book() {
         }));
     };
     return <>
-    <Navbar />
     <div className="wholepage">
     <h1 className="below">Book Tickets</h1>
     <h4>*Movie Name*</h4>
