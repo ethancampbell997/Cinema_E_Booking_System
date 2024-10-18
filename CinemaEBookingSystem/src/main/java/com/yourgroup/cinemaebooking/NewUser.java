@@ -48,6 +48,29 @@ public class NewUser {
 
   } // toString
 
+  public String toStringEdit() {
+
+    String string = "'" + name + "', ";
+    string += "'" + phone + "', ";
+    string += "'" + street + "', ";
+    string += "'" + city + "', ";
+    string += "'" + state + "', ";
+    string += "'" + zip + "', ";
+    string += "'User', ";
+
+    String promoAsInt = "";
+    if (promotion) {
+      promoAsInt = "1";
+    } else {
+      promoAsInt = "0";
+    } // if
+
+    string += "'" + promoAsInt + "'";
+
+    return string;
+
+  } // toString
+
   public void encryptCard() {
     if ((!(cardNumber == null)) && (!(cardNumber.isEmpty()))) {
       cardNumber = CardUtility.encryptCreditCard(cardNumber);
