@@ -13,4 +13,21 @@ public class LoggedInUser {
   private String role;
   private boolean promotional_opt_in;
 
+  public String toStringEdit() {
+
+    String string = "'" + full_name + "', ";
+    string += "'" + phone + "', ";
+    string += "'" + street + "', ";
+    string += "'" + city + "', ";
+    string += "'" + state + "', ";
+    string += "'" + zip + "', ";
+    string += "'User', ";
+
+    return string;
+
+  } // toString
+
+  public int getUser_id() {
+    return user_id;
+  }
 } // LoggedInUser
