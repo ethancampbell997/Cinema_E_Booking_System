@@ -13,28 +13,7 @@ import com.yourgroup.cinemaebooking.accessors.UserAccess;
 public class UserController {
   
   private EmailSenderService emailSenderService;
-
-<<<<<<< HEAD
-    private EmailSenderService emailSenderService;
-
-    @PostMapping
-    public void createUser(@RequestBody NewUser user) {
-        System.out.println("here2");
-        user.hashPassword();
-        user.fixDate();
-        user.encryptCard();
-        UserAccess.saveUser(user);
-        emailSenderService.sendEmail("kazemiazad1@gmail.com", "Confirmation", "Confirmation");
-    } // createUser
-
-    @PostMapping("/profile")
-    public String returnProfile(@RequestBody LoggedInUser user) {
-        return user.toStringEdit();
-    } // return profile
-
-    @PostMapping("/edit")
-    public int editUser(@RequestBody LoggedInUser user, @RequestBody String name, @RequestBody String phone,
-=======
+  
   @PostMapping
   public void createUser(@RequestBody NewUser user) {
     System.out.println("here2");
@@ -52,22 +31,13 @@ public class UserController {
 
 @PostMapping("/edit")
   public int editUser(@RequestBody LoggedInUser user, @RequestBody String name, @RequestBody String phone,
->>>>>>> e3aaa28a06abafc14685d730d0d7f57063e9e6d2
                         @RequestBody String street, @RequestBody String city, @RequestBody String state, @RequestBody String zip) {
         return UserAccess.updateProfile(user.getUser_id(), name, phone, street, city, state, zip);
     } // edit user
-
-<<<<<<< HEAD
-    @PostMapping("/changePassword")
-    public int changePassword(@RequestBody LoggedInUser user, @RequestBody String newPassword) {
-        return UserAccess.updatePassword(user.getUser_id(), newPassword);
-    } // change password
-} // UserController
-=======
+  
 @PostMapping("/changePassword")
   public int changePassword(@RequestBody LoggedInUser user, @RequestBody String newPassword) {
         return UserAccess.updatePassword(user.getUser_id(), newPassword);
     } // change password
+}
 
-} // UserController
->>>>>>> e3aaa28a06abafc14685d730d0d7f57063e9e6d2
