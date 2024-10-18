@@ -18,9 +18,7 @@ public class MovieApplication {
 	}
 
 	@EventListener(ApplicationReadyEvent.class)
-	public int editPassword() {
-		int success = UserAccess.updatePassword(1, "check123");
-		System.out.println(success);
-		return success;
-	}
+	public void createUser() {
+		emailSenderService.sendEmail("kazemiazad1@gmail.com", "Confirmation", "Confirmation");
+	} // createUser
 }
