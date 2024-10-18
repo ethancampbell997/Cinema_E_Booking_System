@@ -188,8 +188,4 @@ public class UserAccess {
       return -1;
     }
   } // updatePassword
-<<<<<<< HEAD
-
-=======
->>>>>>> e3aaa28a06abafc14685d730d0d7f57063e9e6d2
 } // UserAccess
