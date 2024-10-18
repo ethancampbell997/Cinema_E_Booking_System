@@ -16,9 +16,4 @@ public class MovieApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MovieApplication.class, args);
 	}
-
-	@EventListener(ApplicationReadyEvent.class)
-	public void createUser() {
-		emailSenderService.sendEmail("kazemiazad1@gmail.com", "Confirmation", "Confirmation");
-	} // createUser
 }
