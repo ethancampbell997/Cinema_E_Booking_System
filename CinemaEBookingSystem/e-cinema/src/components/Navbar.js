@@ -34,6 +34,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
         setIsLoggedIn(false);
         sessionStorage.removeItem('userEmail'); // Clear email from sessionStorage
         setDropdownVisible(false); 
+        navigate('/'); 
     };
 
     useEffect(() => {

@@ -14,17 +14,25 @@ export function EditProf() {
   });
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/user/profile')
+    const userEmail = sessionStorage.getItem('userEmail'); // Retrieve email from sessionStorage
+  
+    fetch('http://localhost:8080/api/users/profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: userEmail }), // Send email in the request body
+    })
       .then(response => response.json())
       .then(data => {
         setUserData({
           name: data.name || '',
-          street: data.address.street || '',
-          city: data.address.city || '',
-          state: data.address.state || '',
-          zip: data.address.zip || '',
+          street: data.street || '',
+          city: data.city || '',
+          state: data.state || '',
+          zip: data.zip || '',
           promotion: data.promotion || false,
-          cards: data.cards || []
+          cards: data.cards || [],
         });
       })
       .catch(error => console.error('Error fetching user data:', error));

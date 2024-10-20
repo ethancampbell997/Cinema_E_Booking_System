@@ -1,9 +1,13 @@
 package com.yourgroup.cinemaebooking.controllers;
 
+import java.util.Map;
+
 import com.yourgroup.cinemaebooking.EmailSenderService;
 import com.yourgroup.cinemaebooking.LoggedInUser;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.yourgroup.cinemaebooking.NewUser;
 import com.yourgroup.cinemaebooking.accessors.UserAccess;
@@ -34,9 +38,18 @@ public class UserController {
   }
 
 @PostMapping("/profile")
-  public String returnProfile(@RequestBody LoggedInUser user) {
-        return user.toStringEdit();
-    } // return profile
+public ResponseEntity<NewUser> returnProfile(@RequestBody Map<String, String> payload) {
+    String email = payload.get("email");
+    
+    // Fetch user from the database using the email
+    NewUser user = UserAccess.findByEmail(email);
+    
+    if (user != null) {
+        return ResponseEntity.ok(user); // Return user data as JSON
+    } else {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+}
 
 @PostMapping("/edit")
   public int editUser(@RequestBody LoggedInUser user, @RequestBody String name, @RequestBody String phone,

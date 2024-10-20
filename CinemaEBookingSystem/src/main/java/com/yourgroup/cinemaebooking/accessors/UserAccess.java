@@ -188,4 +188,31 @@ public class UserAccess {
       return -1;
     }
   } // updatePassword
+  public static NewUser findByEmail(String email) {
+    String sql = "SELECT * FROM users WHERE email = ?"; 
+    NewUser user = null;
+
+    try (Connection con = DriverManager.getConnection(url, username, password);
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, email);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            user = new NewUser();
+            user.setName(rs.getString("full_name"));
+            user.setEmail(rs.getString("email"));
+            user.setPhone(rs.getString("phone"));
+            user.setStreet(rs.getString("street"));
+            user.setCity(rs.getString("city"));
+            user.setState(rs.getString("state"));
+            user.setZip(rs.getString("zip"));
+            user.setPromotion(rs.getBoolean("promotional_opt_in"));
+            // Handle other user properties like cards
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return user;
+}
 } // UserAccess
