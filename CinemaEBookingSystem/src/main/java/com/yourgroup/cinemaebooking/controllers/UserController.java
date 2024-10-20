@@ -24,7 +24,8 @@ public class UserController {
     user.encryptCard();
     UserAccess.saveUser(user);
     try {
-      emailSenderService.sendEmail("kazemiazad1@gmail.com", "New User Created", "A new user has been created");
+      String userEmail = user.getEmail();
+      emailSenderService.sendEmail(userEmail, "New User Created", "You have created a new account with e-cinema!");
       System.out.println("Email sent successfully");
     } catch (Exception e) {
       System.err.println("Failed to send email: " + e.getMessage());
