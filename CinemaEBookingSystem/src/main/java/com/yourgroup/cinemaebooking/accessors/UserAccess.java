@@ -14,7 +14,7 @@ public class UserAccess {
   private static String password = "Candawg34!";
 
   public static int updateUser(NewUser user) {
-    String sql = "UPDATE users SET full_name = ?, phone = ?, street = ?, city = ?, state = ?, zip = ?, promotional_opt_in = ?, password = ? WHERE email = ?";
+    String sql = "UPDATE users SET full_name = ?, phone = ?, street = ?, city = ?, state = ?, zip = ?, promotional_opt_in = ? WHERE email = ?";
 
     try (Connection con = DriverManager.getConnection(url, username, password);
          PreparedStatement ps = con.prepareStatement(sql)) {
@@ -28,7 +28,6 @@ public class UserAccess {
           System.out.println("State: " + user.getState());
           System.out.println("Zip: " + user.getZip());
           System.out.println("Promotional Opt-in: " + user.getPromotion());
-          System.out.println("Password (hashed): " + user.getPassword()); // Ensure this is hashed
           System.out.println("Email: " + user.getEmail());
         ps.setString(1, user.getName());
         ps.setString(2, user.getPhone());
@@ -37,8 +36,7 @@ public class UserAccess {
         ps.setString(5, user.getState());
         ps.setString(6, user.getZip());
         ps.setBoolean(7, user.getPromotion());
-        ps.setString(8, user.getPassword()); // Add hashed password here
-        ps.setString(9, user.getEmail()); // Ensure this is the identifier
+        ps.setString(8, user.getEmail()); // Ensure this is the identifier
 
         return ps.executeUpdate(); // Returns the number of affected rows
     } catch (SQLException e) {
@@ -46,7 +44,39 @@ public class UserAccess {
         return -1; // Indicate an error
     }
 }
+public static int updatePassword(NewUser user) {
+  String sql = "UPDATE users SET full_name = ?, phone = ?, street = ?, city = ?, state = ?, zip = ?, promotional_opt_in = ?, password = ? WHERE email = ?";
 
+  try (Connection con = DriverManager.getConnection(url, username, password);
+       PreparedStatement ps = con.prepareStatement(sql)) {
+
+        System.out.println("Executing SQL: " + sql);
+        System.out.println("Parameters:");
+        System.out.println("Full Name: " + user.getName());
+        System.out.println("Phone: " + user.getPhone());
+        System.out.println("Street: " + user.getStreet());
+        System.out.println("City: " + user.getCity());
+        System.out.println("State: " + user.getState());
+        System.out.println("Zip: " + user.getZip());
+        System.out.println("Promotional Opt-in: " + user.getPromotion());
+        System.out.println("Password (hashed): " + user.getPassword()); // Ensure this is hashed
+        System.out.println("Email: " + user.getEmail());
+      ps.setString(1, user.getName());
+      ps.setString(2, user.getPhone());
+      ps.setString(3, user.getStreet());
+      ps.setString(4, user.getCity());
+      ps.setString(5, user.getState());
+      ps.setString(6, user.getZip());
+      ps.setBoolean(7, user.getPromotion());
+      ps.setString(8, user.getPassword()); // Add hashed password here
+      ps.setString(9, user.getEmail()); // Ensure this is the identifier
+
+      return ps.executeUpdate(); // Returns the number of affected rows
+  } catch (SQLException e) {
+      e.printStackTrace();
+      return -1; // Indicate an error
+  }
+}
 
   public static int saveUser(NewUser user) {
     String sql = "INSERT INTO users (full_name, email, password, phone, street, city, state, zip, role, promotional_opt_in) VALUES (";

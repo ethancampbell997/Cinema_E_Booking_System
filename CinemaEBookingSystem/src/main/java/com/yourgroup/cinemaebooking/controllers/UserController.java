@@ -56,9 +56,17 @@ public ResponseEntity<NewUser> returnProfile(@RequestBody Map<String, String> pa
 @PostMapping("/edit")
 public ResponseEntity<Map<String, String>> editUser(@RequestBody NewUser user) {
     Map<String, String> response = new HashMap<>();
-    System.out.println("Edit is working");
     try {
-        UserAccess.updateUser(user); //Update database
+        // Ensure password is hashed if changed
+        if (user.getPassword() != null) {
+            user.setPassword(PasswordUtility.hashPass(user.getPassword()));
+        }
+
+        UserAccess.updateUser(user); // Update user in the database
+
+        // Send confirmation email
+        emailSenderService.sendEmail(user.getEmail(), "Account Updated", "Your account has been updated successfully!");
+        
         response.put("message", "User updated successfully");
         return ResponseEntity.ok(response);
     } catch (Exception e) {
@@ -88,7 +96,8 @@ public ResponseEntity<Map<String, String>> changePassword(@RequestBody Map<Strin
     if (user != null) {
         user.setPassword(newPassword);
         user.hashPassword(); // Hash the new password
-        UserAccess.updateUser(user); // Update user in the database
+        UserAccess.updatePassword(user); // Update user in the database
+        emailSenderService.sendEmail(user.getEmail(), "Password changed", "Your password has been changed.");
 
         response.put("success", "true");
         response.put("message", "Password changed successfully!");
