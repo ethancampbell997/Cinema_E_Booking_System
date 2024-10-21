@@ -57,18 +57,9 @@ public ResponseEntity<Map<String, String>> editUser(@RequestBody NewUser user) {
     Map<String, String> response = new HashMap<>();
     System.out.println("Edit is working");
     try {
-        // Update user information in the database
-        int result = UserAccess.updateUser(user);
+        UserAccess.updateUser(user); //Update database
         response.put("message", "User updated successfully");
         return ResponseEntity.ok(response);
-        /*if (result >= 0) {
-            
-        } else {
-            response.put("message", "User updated successfully");
-            return ResponseEntity.ok(response);
-            //response.put("message", "Failed to update user");
-            //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-        }*/
     } catch (Exception e) {
         response.put("message", "An error occurred: " + e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
