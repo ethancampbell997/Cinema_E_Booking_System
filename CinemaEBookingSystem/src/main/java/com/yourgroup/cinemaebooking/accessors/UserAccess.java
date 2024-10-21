@@ -13,6 +13,27 @@ public class UserAccess {
   private static String username = "cameran";
   private static String password = "Candawg34!";
 
+  public static int updateUser(NewUser user) {
+    String sql = "UPDATE users SET full_name = ?, phone = ?, street = ?, city = ?, state = ?, zip = ?, promotional_opt_in = ? WHERE email = ?";
+    
+    try (Connection con = DriverManager.getConnection(url, username, password);
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, user.getName());
+        ps.setString(2, user.getPhone());
+        ps.setString(3, user.getStreet());
+        ps.setString(4, user.getCity());
+        ps.setString(5, user.getState());
+        ps.setString(6, user.getZip());
+        ps.setBoolean(7, user.getPromotion());
+        ps.setString(8, user.getEmail());
+
+        return ps.executeUpdate(); // Returns the number of affected rows
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return -1; // Indicate an error
+    }
+}
+
   public static int saveUser(NewUser user) {
     String sql = "INSERT INTO users (full_name, email, password, phone, street, city, state, zip, role, promotional_opt_in) VALUES (";
     sql += (user.toString() + ")");
@@ -126,39 +147,6 @@ public class UserAccess {
 
   } // getHashedPass
 
-  public static int updateProfile(int id, String name, String phone, String street, String city, String state, String zip) {
-    Connection conn = null;
-    Statement st = null;
-
-    try {
-      conn = DriverManager.getConnection(url, username, password);
-      //st = conn.createStatement();
-      String sql = "UPDATE users SET full_name = ?, phone = ?, street = ?, city = ?, state = ?, zip = ? WHERE user_id = ?";
-
-      PreparedStatement ps = conn.prepareStatement(sql);
-      ps.setString(1, name);
-      ps.setString(2, phone);
-      ps.setString(3, street);
-      ps.setString(4, city);
-      ps.setString(5, state);
-      ps.setString(6, zip);
-      ps.setInt(7, id);
-
-      System.out.println("SQL" + sql);
-      int rowsAffected = ps.executeUpdate();
-
-      System.out.println(rowsAffected);
-      System.out.println("Update Complete");
-      return rowsAffected;
-
-    } catch (SQLException ex) {
-      ex.printStackTrace();
-      System.out.println("SQL State" + ex.getSQLState());
-      System.out.println("Error Code" + ex.getErrorCode());
-      System.out.println("Error Message" + ex.getMessage());
-      return -1;
-    }
-  } // updateProfile
 
   public static int updatePassword(int id, String uPassword) {
     Connection conn = null;

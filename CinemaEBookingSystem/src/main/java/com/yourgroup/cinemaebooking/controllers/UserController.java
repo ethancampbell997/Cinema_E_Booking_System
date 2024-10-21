@@ -1,5 +1,6 @@
 package com.yourgroup.cinemaebooking.controllers;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.yourgroup.cinemaebooking.EmailSenderService;
@@ -52,10 +53,26 @@ public ResponseEntity<NewUser> returnProfile(@RequestBody Map<String, String> pa
 }
 
 @PostMapping("/edit")
-  public int editUser(@RequestBody LoggedInUser user, @RequestBody String name, @RequestBody String phone,
-                        @RequestBody String street, @RequestBody String city, @RequestBody String state, @RequestBody String zip) {
-        return UserAccess.updateProfile(user.getUser_id(), name, phone, street, city, state, zip);
-    } // edit user
+public ResponseEntity<Map<String, String>> editUser(@RequestBody NewUser user) {
+    Map<String, String> response = new HashMap<>();
+    System.out.println("Edit is working");
+    try {
+        // Update user information in the database
+        int result = UserAccess.updateUser(user);
+        if (result >= 0) {
+            response.put("message", "User updated successfully");
+            return ResponseEntity.ok(response);
+        } else {
+            response.put("message", "User updated successfully");
+            return ResponseEntity.ok(response);
+            //response.put("message", "Failed to update user");
+            //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    } catch (Exception e) {
+        response.put("message", "An error occurred: " + e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+}
   
 @PostMapping("/changePassword")
   public int changePassword(@RequestBody LoggedInUser user, @RequestBody String newPassword) {

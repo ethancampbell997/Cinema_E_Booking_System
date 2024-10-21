@@ -9,8 +9,7 @@ export function EditProf() {
     city: '',
     state: '',
     zip: '',
-    promotion: false,
-    cards: []
+    promotion: false
   });
 
   useEffect(() => {
@@ -31,8 +30,7 @@ export function EditProf() {
           city: data.city || '',
           state: data.state || '',
           zip: data.zip || '',
-          promotion: data.promotion || false,
-          cards: data.cards || [],
+          promotion: data.promotion || false
         });
       })
       .catch(error => console.error('Error fetching user data:', error));
@@ -47,46 +45,42 @@ export function EditProf() {
     setUserData(prevState => ({ ...prevState, promotion: e.target.checked }));
   };
 
-  const handleCardChange = (index, field, value) => {
-    const newCards = [...userData.cards];
-    newCards[index][field] = value;
-    setUserData(prevState => ({ ...prevState, cards: newCards }));
-  };
-
-  const addCard = () => {
-    if (userData.cards.length < 4) {
-      setUserData(prevState => ({
-        ...prevState,
-        cards: [...prevState.cards, { cardType: "", cardNumber: "", expiration: "", cvc: "" }]
-      }));
-    }
-  };
-
-  const deleteCard = (index) => {
-    const newCards = [...userData.cards];
-    newCards.splice(index, 1);
-    setUserData(prevState => ({ ...prevState, cards: newCards }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:8080/api/user/profile', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
+    console.log('Submitting user data:', userData);
+    const userEmail = sessionStorage.getItem('userEmail');
+    fetch('http://localhost:8080/api/users/edit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "name": userData.name,
+          "street": userData.street,
+          "city": userData.city,
+          "state": userData.state,
+          "zip": userData.zip,
+          "promotion": userData.promotion,
+          "email": userEmail
+        }),
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-        // Handle success (e.g., show a success message, redirect, etc.)
-      })
-      .catch((error) => {
+    .then(response => {
+        console.log('Response status:', response.status);
+        return response.text(); // Get the response as text
+    })
+    .then(text => {
+        try {
+            const data = JSON.parse(text); // Try to parse the text as JSON
+            console.log('Success:', data);
+        } catch (error) {
+            console.error('Failed to parse JSON:', text); // Log the response text
+        }
+    })
+    .catch((error) => {
         console.error('Error:', error);
-        // Handle error (e.g., show an error message)
-      });
-  };
+    });
+};
 
   return (
     <>
@@ -96,54 +90,6 @@ export function EditProf() {
           <label htmlFor="name">Name: </label>
           <input type="text" id="name" value={userData.name} onChange={handleInputChange} /><br />
 
-          <h4>Payment Info</h4>
-          {userData.cards.map((card, index) => (
-            <div key={index} className="card-info">
-              <label htmlFor={`payment-${index}`}>Card Type: </label>
-              <select
-                id={`payment-${index}`}
-                value={card.cardType}
-                onChange={(e) => handleCardChange(index, 'cardType', e.target.value)}
-              >
-                <option value="" disabled>Select Card Type</option>
-                <option value="Visa">Visa</option>
-                <option value="MasterCard">MasterCard</option>
-                <option value="Discover">Discover</option>
-                <option value="American Express">American Express</option>
-              </select><br />
-
-              <label htmlFor={`cardNumber-${index}`}>Card Number: </label>
-              <input
-                type="text"
-                id={`cardNumber-${index}`}
-                value={card.cardNumber}
-                onChange={(e) => handleCardChange(index, 'cardNumber', e.target.value)}
-              /><br />
-
-              <label htmlFor={`expiration-${index}`}>Expiration Date: </label>
-              <input
-                type="text"
-                id={`expiration-${index}`}
-                value={card.expiration}
-                onChange={(e) => handleCardChange(index, 'expiration', e.target.value)}
-              /><br />
-
-              <label htmlFor={`cvc-${index}`}>CVC: </label>
-              <input
-                type="text"
-                id={`cvc-${index}`}
-                value={card.cvc}
-                onChange={(e) => handleCardChange(index, 'cvc', e.target.value)}
-              /><br /><br />
-
-              <button type="button" onClick={() => deleteCard(index)}>Delete Card</button>
-              <br /><br />
-            </div>
-          ))}
-          {userData.cards.length < 4 && (
-            <button type="button" onClick={addCard}>Add Card</button>
-          )}
-          <br /><br />
 
           <h4>Address</h4>
           <label htmlFor="street">Street: </label>
