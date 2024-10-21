@@ -1,8 +1,10 @@
 import "../styles.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function EditProf() {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     name: '',
     street: '',
@@ -67,7 +69,9 @@ export function EditProf() {
     })
     .then(response => {
         console.log('Response status:', response.status);
+        navigate('/'); 
         return response.text(); // Get the response as text
+        
     })
     .then(text => {
         try {
