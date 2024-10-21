@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.yourgroup.cinemaebooking.NewUser;
 import com.yourgroup.cinemaebooking.accessors.UserAccess;
+import com.yourgroup.cinemaebooking.utilities.PasswordUtility;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -67,8 +68,43 @@ public ResponseEntity<Map<String, String>> editUser(@RequestBody NewUser user) {
 }
   
 @PostMapping("/changePassword")
-  public int changePassword(@RequestBody LoggedInUser user, @RequestBody String newPassword) {
-        return UserAccess.updatePassword(user.getUser_id(), newPassword);
-    } // change password
+public ResponseEntity<Map<String, String>> changePassword(@RequestBody Map<String, String> payload) {
+    System.out.println("Received payload: " + payload);  
+    String email = payload.get("email");
+    String oldPassword = payload.get("oldPassword");
+    String newPassword = payload.get("newPassword");
+
+    Map<String, String> response = new HashMap<>();
+
+    // Validate old password
+    if (!validateUser(email, oldPassword)) {
+        response.put("success", "false");
+        response.put("message", "Old password is incorrect. Try again.");
+        return ResponseEntity.status(401).body(response);
+    }
+
+    // If old password is correct, update the new password
+    NewUser user = UserAccess.findByEmail(email);
+    if (user != null) {
+        user.setPassword(newPassword);
+        user.hashPassword(); // Hash the new password
+        UserAccess.updateUser(user); // Update user in the database
+
+        response.put("success", "true");
+        response.put("message", "Password changed successfully!");
+        return ResponseEntity.ok(response);
+    } else {
+        response.put("success", "false");
+        response.put("message", "User not found.");
+        return ResponseEntity.status(404).body(response);
+    }
+}
+
+    private boolean validateUser(String email, String password) {
+        if (UserAccess.checkForEmail(email) == 1) {
+            return PasswordUtility.verifyPass(password, UserAccess.getHashedPass(email));
+        }
+        return false;
+    }
 }
 

@@ -10,30 +10,27 @@ export function ChangePassword() {
 
   const changePassword = async (e) => {
     e.preventDefault();
+    const userEmail = sessionStorage.getItem('userEmail'); // Get email from session storage
     try {
-      const response = await fetch('http://localhost:8080/api/users/changePassword', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: userEmail, oldPassword, newPassword }),
-      });
-      const result = await response.json();
-
-      if (response.ok) {
-        if (result.success) {
-          alert("Password changed successfully!");
-          // You might want to redirect the user or clear the form here
+        const response = await fetch('http://localhost:8080/api/users/changePassword', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ "email": userEmail, "oldPassword": oldPassword, "newPassword": newPassword }),
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            alert(result.message); // Show success message
         } else {
-          setError(result.message || "Old password is incorrect. Try again.");
+            setError(result.message || "Failed to change password.");
         }
-      } else {
-        setError("An error occurred. Please try again.");
-      }
     } catch (error) {
-      setError("An error occurred. Please try again.");
+        setError("An error occurred. Please try again.");
     }
-  };
+};
 
   return (
     <div className="wholepage">
