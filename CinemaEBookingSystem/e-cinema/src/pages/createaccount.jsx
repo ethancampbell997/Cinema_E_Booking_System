@@ -62,7 +62,7 @@ export function CreateAccount() {
     <input type="email" id="email" placeholder="youremail@gmail.com" required onChange={handleChange}></input><br></br>
 
     <label for="password"><span className="reqqq">* </span>Password: </label>
-    <input type="password" id="password" placeholder="Your Password" required onChange={handleChange}></input><br></br>
+    <input type="password" id="password" placeholder="Your Password" required onChange={handleChange} minLength="8"></input><br></br>
 
     <label for="phone"><span className="reqqq">* </span>Phone Number: </label>
     <input onChange={handleChange} type="tel" id="phone" placeholder="123-456-7890" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"></input><br></br>

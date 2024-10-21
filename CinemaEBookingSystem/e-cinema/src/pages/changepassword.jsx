@@ -54,6 +54,7 @@ export function ChangePassword() {
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           required
+          minLength="8"
         />
         <br />
         <button className="FinishButton" type="submit">Submit</button>
