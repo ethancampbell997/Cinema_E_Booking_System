@@ -187,6 +187,34 @@ public class MovieAccess {
 
     } // getStatus
 
+    public static String getGenre(int id) {
+        /* Pre: Movie exists */
+        String sql = "select rating from movies where movie_id=" + Integer.toString(id);
+        Statement st = null;
+        ResultSet rs = null;
+
+        try {
+            Connection con = DriverManager.getConnection(url, username, password);
+            if (con == null) {
+                return "ERR";
+            } // if
+
+            st = con.createStatement();
+            if (st == null) {
+                return "ERR";
+            } // if
+
+            rs = st.executeQuery(sql);
+            rs.next();
+            String genre = rs.getString(1);
+            return genre;
+
+        } catch (SQLException e) {
+            return "ERR";
+        } // try
+
+    } // getStatus
+
     public static ArrayList<MovieObject> getAllMovies() {
         String sql = "SELECT * FROM movies";
         Statement st = null;
@@ -212,10 +240,11 @@ public class MovieAccess {
                 String trailerLink = rs.getString("trailer_link");
                 String trailerPic = rs.getString("trailer_pic");
                 String rating = rs.getString("rating");
+                String genre = rs.getString("genre");
 
-                System.out.println("ID: " + id + ", Title: " + title + ", Rating: " + rating);
+                System.out.println("ID: " + id + ", Title: " + title + ", Rating: " + rating + ", Genre: " + genre);
 
-                MovieObject movie = new MovieObject(id, title, status, trailerLink, trailerPic, rating);
+                MovieObject movie = new MovieObject(id, title, status, trailerLink, trailerPic, rating, genre);
                 movies.add(movie);
             }
         } catch (SQLException e) {
