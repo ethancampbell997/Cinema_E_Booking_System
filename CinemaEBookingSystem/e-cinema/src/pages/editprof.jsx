@@ -84,6 +84,8 @@ export function EditProf() {
     e.preventDefault();
     console.log("Submitting user data:", userData);
     const userEmail = sessionStorage.getItem("userEmail");
+    
+    // Submit user data
     fetch("http://localhost:8080/api/users/edit", {
       method: "POST",
       headers: {
@@ -97,24 +99,50 @@ export function EditProf() {
         zip: userData.zip,
         promotion: userData.promotion,
         email: userEmail,
-        cards: cardData, // Include the card data in the submission
       }),
     })
       .then((response) => {
-        console.log("Response status:", response.status);
-        navigate("/");
+        console.log("User data response status:", response.status);
         return response.text(); // Get the response as text
       })
       .then((text) => {
         try {
           const data = JSON.parse(text); // Try to parse the text as JSON
-          console.log("Success:", data);
+          console.log("User data success:", data);
+          navigate('/'); 
         } catch (error) {
-          console.error("Failed to parse JSON:", text); // Log the response text
+          console.error("Failed to parse user data JSON:", text); // Log the response text
         }
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error("Error submitting user data:", error);
+      });
+  
+    // Submit card data
+    fetch("http://localhost:8080/api/users/editcards", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: userEmail,
+        cards: cardData,
+      }),
+    })
+      .then((response) => {
+        console.log("Card data response status:", response.status);
+        return response.text(); // Get the response as text
+      })
+      .then((text) => {
+        try {
+          const data = JSON.parse(text); // Try to parse the text as JSON
+          console.log("Card data success:", data);
+        } catch (error) {
+          console.error("Failed to parse card data JSON:", text); // Log the response text
+        }
+      })
+      .catch((error) => {
+        console.error("Error submitting card data:", error);
       });
   };
 

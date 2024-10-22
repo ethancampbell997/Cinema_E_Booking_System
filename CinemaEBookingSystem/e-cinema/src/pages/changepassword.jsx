@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "../styles.css";
+import { useNavigate } from "react-router-dom";
 
 export function ChangePassword() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
   const userEmail = sessionStorage.getItem('userEmail');
-
+  const navigate = useNavigate();
 
   const changePassword = async (e) => {
+    
     e.preventDefault();
     const userEmail = sessionStorage.getItem('userEmail');
     try {
@@ -24,6 +26,7 @@ export function ChangePassword() {
         
         if (response.ok) {
             alert(result.message);
+            navigate('/'); 
         } else {
             setError(result.message || "Failed to change password.");
         }

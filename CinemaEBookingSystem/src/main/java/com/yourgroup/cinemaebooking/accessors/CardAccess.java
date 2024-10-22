@@ -88,4 +88,61 @@ public class CardAccess {
     
         return cards.isEmpty() ? null : cards;
     }
+    public static boolean updateCard(PaymentCard card, String email) {
+        String sql = "UPDATE cards SET card_type = ?, card_number = ?, expiration_date = ? " +
+                     "WHERE card_id = ? AND user_id = (SELECT user_id FROM users WHERE email = ?)";
+        
+        // Convert expiration date from MM/YYYY to YYYY-MM-DD
+        String[] expParts = card.getExpirationDate().split("/");
+        String formattedDate = expParts[1] + "-" + expParts[0] + "-01"; // Set to the first day of the month
+    
+        try (Connection con = DriverManager.getConnection(url, username, password);
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, card.getCardType());
+            ps.setString(2, CardUtility.encryptCreditCard(card.getCardNumber())); // Encrypt before saving
+            ps.setString(3, formattedDate); // Use the formatted date
+            ps.setInt(4, card.getCardId());
+            ps.setString(5, email);
+            
+            return ps.executeUpdate() > 0; // Return true if update was successful
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log SQL exceptions
+            return false; // Handle error accordingly
+        }
+    }
+    public static boolean cardExists(int cardId, String email) {
+        String sql = "SELECT COUNT(*) FROM cards WHERE card_id = ? AND user_id = (SELECT user_id FROM users WHERE email = ?)";
+        try (Connection con = DriverManager.getConnection(url, username, password);
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, cardId);
+            ps.setString(2, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // Returns true if card exists
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false; // Default to false if an error occurs
+    }
+    public static boolean insertCard(PaymentCard card, String email) {
+        String sql = "INSERT INTO cards (card_type, card_number, expiration_date, user_id) VALUES (?, ?, ?, (SELECT user_id FROM users WHERE email = ?))";
+        
+        // Convert expiration date from MM/YYYY to YYYY-MM-DD
+        String[] expParts = card.getExpirationDate().split("/");
+        String formattedDate = expParts[1] + "-" + expParts[0] + "-01"; // Set to the first day of the month
+    
+        try (Connection con = DriverManager.getConnection(url, username, password);
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, card.getCardType());
+            ps.setString(2, CardUtility.encryptCreditCard(card.getCardNumber())); // Encrypt before saving
+            ps.setString(3, formattedDate); // Use the formatted date
+            ps.setString(4, email);
+            
+            return ps.executeUpdate() > 0; // Return true if insert was successful
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Handle error accordingly
+        }
+    }
 } // CardAccess

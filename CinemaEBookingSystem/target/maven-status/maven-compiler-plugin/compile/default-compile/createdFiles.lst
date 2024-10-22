@@ -12,6 +12,9 @@ com\yourgroup\cinemaebooking\EmailSenderService.class
 com\yourgroup\cinemaebooking\MovieObject.class
 com\yourgroup\cinemaebooking\LoggedInUser.class
 com\yourgroup\cinemaebooking\accessors\UserAccess.class
+com\yourgroup\cinemaebooking\accessors\CardAccess.class
 com\yourgroup\cinemaebooking\controllers\UserController.class
+com\yourgroup\cinemaebooking\controllers\UserController$EditCardsRequest.class
+com\yourgroup\cinemaebooking\PaymentCard.class
 com\yourgroup\cinemaebooking\MovieApplication.class
 com\yourgroup\cinemaebooking\utilities\PasswordUtility.class

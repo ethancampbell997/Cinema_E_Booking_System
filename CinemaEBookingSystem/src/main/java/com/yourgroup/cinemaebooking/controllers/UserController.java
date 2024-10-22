@@ -214,5 +214,49 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
         }
     }
+    @PostMapping("/editcards")
+    public ResponseEntity<Map<String, String>> editCards(@RequestBody EditCardsRequest request) {
+        System.out.println("Received payload: " + request);
+        Map<String, String> response = new HashMap<>();
+        String email = request.getEmail();
+        List<PaymentCard> cards = request.getCards();
+    
+        // Log the cards being processed
+        System.out.println("Cards to process: " + cards);
+    
+        for (PaymentCard card : cards) {
+            // Check if the card exists
+            boolean cardExists = CardAccess.cardExists(card.getCardId(), email);
+            if (cardExists) {
+                boolean updated = CardAccess.updateCard(card, email);
+                if (!updated) {
+                    response.put("message", "Failed to update card with ID: " + card.getCardId());
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+                }
+            } else {
+                // If the card doesn't exist, insert it
+                boolean inserted = CardAccess.insertCard(card, email);
+                if (!inserted) {
+                    response.put("message", "Failed to insert card with ID: " + card.getCardId());
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+                }
+            }
+        }
+    
+        response.put("message", "Cards processed successfully");
+        return ResponseEntity.ok(response);
+    }
+
+public static class EditCardsRequest {
+    private String email;
+    private List<PaymentCard> cards;
+
+    // Getters and Setters
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public List<PaymentCard> getCards() { return cards; }
+    public void setCards(List<PaymentCard> cards) { this.cards = cards; }
+}
 }
 

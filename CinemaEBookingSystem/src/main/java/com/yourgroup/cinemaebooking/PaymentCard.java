@@ -1,11 +1,15 @@
 package com.yourgroup.cinemaebooking;
 
 public class PaymentCard {
+    private int cardId; // Unique identifier for the card
     private String cardType;
     private String cardNumber;
     private String expirationDate;
 
     // Getters and Setters
+    public int getCardId() { return cardId; }
+    public void setCardId(int cardId) { this.cardId = cardId; }
+
     public String getCardType() { return cardType; }
     public void setCardType(String cardType) { this.cardType = cardType; }
 
