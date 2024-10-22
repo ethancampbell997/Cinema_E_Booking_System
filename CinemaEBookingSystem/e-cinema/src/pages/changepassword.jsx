@@ -10,7 +10,7 @@ export function ChangePassword() {
 
   const changePassword = async (e) => {
     e.preventDefault();
-    const userEmail = sessionStorage.getItem('userEmail'); // Get email from session storage
+    const userEmail = sessionStorage.getItem('userEmail');
     try {
         const response = await fetch('http://localhost:8080/api/users/changePassword', {
             method: "POST",
@@ -23,7 +23,7 @@ export function ChangePassword() {
         const result = await response.json();
         
         if (response.ok) {
-            alert(result.message); // Show success message
+            alert(result.message);
         } else {
             setError(result.message || "Failed to change password.");
         }

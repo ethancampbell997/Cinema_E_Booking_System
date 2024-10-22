@@ -15,14 +15,14 @@ export function EditProf() {
   });
 
   useEffect(() => {
-    const userEmail = sessionStorage.getItem('userEmail'); // Retrieve email from sessionStorage
+    const userEmail = sessionStorage.getItem('userEmail');
   
     fetch('http://localhost:8080/api/users/profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: userEmail }), // Send email in the request body
+      body: JSON.stringify({ email: userEmail }),
     })
       .then(response => response.json())
       .then(data => {
@@ -70,15 +70,15 @@ export function EditProf() {
     .then(response => {
         console.log('Response status:', response.status);
         navigate('/'); 
-        return response.text(); // Get the response as text
+        return response.text();
         
     })
     .then(text => {
         try {
-            const data = JSON.parse(text); // Try to parse the text as JSON
+            const data = JSON.parse(text);
             console.log('Success:', data);
         } catch (error) {
-            console.error('Failed to parse JSON:', text); // Log the response text
+            console.error('Failed to parse JSON:', text);
         }
     })
     .catch((error) => {

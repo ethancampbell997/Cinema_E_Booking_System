@@ -27,7 +27,7 @@ export function CreateAccount() {
       console.log(`Updated ${id}: ${type === 'checkbox' ? checked : value}`);
     };
     const handleSubmit = async (e) => {
-      e.preventDefault(); // Prevent default form submission
+      e.preventDefault();
   
       try {
         const response = await fetch('http://localhost:8080/api/users', {

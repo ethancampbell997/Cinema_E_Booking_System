@@ -69,7 +69,7 @@ export function ForgotPassword() {
                 setMessage("Your password has been reset! Redirecting to home page...");
 
                 setTimeout(() => {
-                    navigate('/'); // Change "/home" to your actual home route
+                    navigate('/');
                 }, 3000);
             } else {
                 throw new Error("Failed to reset password.");

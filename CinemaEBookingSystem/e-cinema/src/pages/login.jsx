@@ -18,11 +18,11 @@ export const LogIn = ({ setIsLoggedIn }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password }), // Updated to send email
+                body: JSON.stringify({ email, password }),
             });
 
             if (!response.ok) {
-                throw new Error('Login failed: Invalid email or password'); // Updated error message
+                throw new Error('Login failed: Invalid email or password');
             }
 
             const data = await response.json();
