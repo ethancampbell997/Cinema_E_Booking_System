@@ -122,9 +122,10 @@ public class CardAccess {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } // try
         return false; // Default to false if an error occurs
-    }
+    } // cardExists
+
     public static boolean insertCard(PaymentCard card, String email) {
         String sql = "INSERT INTO cards (card_type, card_number, expiration_date, user_id) VALUES (?, ?, ?, (SELECT user_id FROM users WHERE email = ?))";
         
@@ -143,6 +144,8 @@ public class CardAccess {
         } catch (SQLException e) {
             e.printStackTrace();
             return false; // Handle error accordingly
-        }
-    }
+        } // try
+
+    } // insertCard
+
 } // CardAccess
