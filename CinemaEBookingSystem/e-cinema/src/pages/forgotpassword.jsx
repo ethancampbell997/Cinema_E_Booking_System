@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles.css";
 import Navbar from "../components/Navbar";
 
@@ -8,6 +9,8 @@ export function ForgotPassword() {
     const [code, setCode] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [message, setMessage] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const navigate = useNavigate();
 
     const handleEmailSubmit = async (e) => {
         e.preventDefault();
@@ -53,6 +56,7 @@ export function ForgotPassword() {
 
     const handlePasswordSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true);
         try {
             const response = await fetch("http://localhost:8080/api/users/reset-password", {
                 method: "POST",
@@ -62,7 +66,11 @@ export function ForgotPassword() {
                 body: JSON.stringify({ email, newPassword }),
             });
             if (response.ok) {
-                setMessage("Your password has been reset!");
+                setMessage("Your password has been reset! Redirecting to home page...");
+
+                setTimeout(() => {
+                    navigate('/'); // Change "/home" to your actual home route
+                }, 3000);
             } else {
                 throw new Error("Failed to reset password.");
             }
@@ -117,7 +125,12 @@ export function ForgotPassword() {
                             required
                         />
                         <br />
-                        <input className="FinishButton" type="submit" value="Reset Password" />
+                        <input 
+                            className="FinishButton" 
+                            type="submit" 
+                            value="Reset Password"
+                            disabled={isSubmitting} 
+                        />
                     </form>
                 )}
             </div>

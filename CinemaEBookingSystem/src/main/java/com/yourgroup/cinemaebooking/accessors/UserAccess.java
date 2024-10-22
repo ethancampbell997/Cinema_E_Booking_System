@@ -275,4 +275,44 @@ public class UserAccess {
 
     } // storeResetCode
 
+    public static int getResetCode(String email) {
+        String sql = "SELECT resetCode FROM users WHERE email = '";
+        sql += email;
+        sql += "';";
+        try {
+            Connection con = DriverManager.getConnection(url, username, password);
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int resetCode = rs.getInt("resetCode");
+            return resetCode;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        } // try
+
+    } // getResetCode
+
+    public static boolean updatePassword(String email, String newPassword) {
+        String sql = "UPDATE users SET password = '";
+        sql += newPassword;
+        sql += "' WHERE email = '";
+        sql += email;
+        sql += "';";
+        try {
+            Connection con = DriverManager.getConnection(url, username, password);
+            PreparedStatement ps = con.prepareStatement(sql);
+            if (ps.executeUpdate() == 0) {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } // try
+
+        return true;
+
+    } // updatePassword
+
 } // UserAccess

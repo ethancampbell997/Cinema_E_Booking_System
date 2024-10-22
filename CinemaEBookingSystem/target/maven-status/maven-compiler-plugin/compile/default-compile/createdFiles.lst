@@ -1,8 +1,8 @@
 com\yourgroup\cinemaebooking\controllers\LogInController.class
-com\yourgroup\cinemaebooking\controllers\EmailController.class
 com\yourgroup\cinemaebooking\controllers\MovieRequest.class
 com\yourgroup\cinemaebooking\NewUser.class
 com\yourgroup\cinemaebooking\PasswordUtility.class
+com\yourgroup\cinemaebooking\PasswordResetRequest.class
 com\yourgroup\cinemaebooking\accessors\MovieAccess.class
 com\yourgroup\cinemaebooking\utilities\CardUtility.class
 com\yourgroup\cinemaebooking\CinemaEBookingApplication.class

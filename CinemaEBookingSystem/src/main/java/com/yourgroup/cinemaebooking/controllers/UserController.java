@@ -6,6 +6,8 @@ import java.util.Random;
 
 import com.yourgroup.cinemaebooking.EmailSenderService;
 import com.yourgroup.cinemaebooking.LoggedInUser;
+import com.yourgroup.cinemaebooking.PasswordResetRequest;
+import com.yourgroup.cinemaebooking.utilities.PasswordUtility;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 
 import com.yourgroup.cinemaebooking.NewUser;
 import com.yourgroup.cinemaebooking.accessors.UserAccess;
-import com.yourgroup.cinemaebooking.utilities.PasswordUtility;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -125,6 +126,43 @@ public class UserController {
         } // if
 
     } // forgotPassword
+
+    @PostMapping("/verify-code")
+    public ResponseEntity<Map<String, String>> verifyCode(@RequestBody String test) {
+        Map<String, String> response = new HashMap<>();
+        System.out.println("Test1: " + test);
+        String email = test.substring(10, (test.length()-18));
+        System.out.println(email);
+        String code = test.substring((test.length() - 8), (test.length() - 2));
+        System.out.println(code);
+        System.out.println("Actual code: " + UserAccess.getResetCode(email));
+        int actualCode = UserAccess.getResetCode(email);
+        int codeAsInt = Integer.parseInt(code);
+        if (codeAsInt == actualCode) {
+            response.put("message", "Code verified successfully");
+            return ResponseEntity.ok(response);
+        } else {
+            response.put("message", "Code NOT verified");
+            return ResponseEntity.status(404).body(response);
+        } // if
+
+    } // verifyCode
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<Map<String, String>> resetPasswordPage(@RequestBody PasswordResetRequest request) {
+        Map<String, String> response = new HashMap<>();
+        String email = request.getEmail();
+        String newPassword = request.getNewPassword();
+        String newPassHashed = PasswordUtility.hashPass(newPassword);
+        if (UserAccess.updatePassword(email, newPassHashed)) {
+            response.put("message", "Password updated successfully");
+            return ResponseEntity.ok(response);
+        } else {
+            response.put("message", "Password NOT updated successfully");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        } // if
+        
+    } // resetPasswordPage
 
     private boolean sendVerificationCode(String email) {
         email = email.substring(10, (email.length() - 2));
