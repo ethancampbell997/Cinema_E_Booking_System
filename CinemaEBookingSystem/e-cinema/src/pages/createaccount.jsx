@@ -17,7 +17,9 @@ export function CreateAccount() {
       zip: '',
       promotion: false
     });
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
     const handleChange = (e)=> {
       const {id, type, checked, value} = e.target;
       setFormData({
@@ -26,9 +28,11 @@ export function CreateAccount() {
       });
       console.log(`Updated ${id}: ${type === 'checkbox' ? checked : value}`);
     };
+
     const handleSubmit = async (e) => {
       e.preventDefault();
-  
+      setLoading(true);
+
       try {
         const response = await fetch('http://localhost:8080/api/users', {
           method: 'POST',
@@ -43,9 +47,11 @@ export function CreateAccount() {
           navigate('/regcon');
         } else {
           console.error('Error:', response.statusText);
+          setLoading(false);
         }
       } catch (error) {
         console.error('Request failed:', error);
+        setLoading(false);
       }
     };
     return <>
@@ -102,7 +108,12 @@ export function CreateAccount() {
 
 
     <input className="FinishButton" type="reset"></input>
-    <input className="FinishButton" type="submit"></input>
+    <input 
+      className="FinishButton" 
+      type="submit"
+      value={loading ? "Creating Account..." : "Create Account"}
+      disabled={loading} // Disable when loading
+    ></input>
   </form>
   </div>
   </>
