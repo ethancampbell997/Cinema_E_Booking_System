@@ -14,6 +14,7 @@ public class MovieObject {
     private String trailerLink;
     private String trailerPic;
     private String rating;
+    private String genre;
 
     public MovieObject() {
         id = -1;
@@ -22,14 +23,16 @@ public class MovieObject {
         trailerLink = "ERR";
         trailerPic = "ERR";
         rating = "ERR";
+        genre = "ERR";
     }
-    public MovieObject(int id, String title, String status, String trailerLink, String trailerPic, String rating) {
+    public MovieObject(int id, String title, String status, String trailerLink, String trailerPic, String rating, String genre) {
         this.id = id;
         this.title = title;
         this.status = status;
         this.trailerLink = trailerLink;
         this.trailerPic = trailerPic;
         this.rating = rating;
+        this.genre = genre;
     }
 
     public MovieObject(String t) {
@@ -41,6 +44,7 @@ public class MovieObject {
             trailerLink = "ERR";
             trailerPic = "ERR";
             rating = "ERR";
+            genre = "ERR";
         } else if (id == 0) {
             /* Movie with title t does not exist */
             title = "DNE";
@@ -48,12 +52,14 @@ public class MovieObject {
             trailerLink = "DNE";
             trailerPic = "DNE";
             rating = "DNE";
+            genre = "DNE";
         } else {
             title = t;
             status = MovieAccess.getStatus(id);
             trailerLink = MovieAccess.getTrailerLink(id);
             trailerPic = MovieAccess.getTrailerPic(id);
             rating = MovieAccess.getRating(id);
+            genre = MovieAccess.getGenre(id);
         } // if
 
     } // MovieObject
@@ -78,8 +84,12 @@ public class MovieObject {
         return rating;
     } // getRating
 
+    public String getGenre() {
+        return genre;
+    } // getGenre
+
     public String toString() {
-        String temp = title + ", " + status + ", " + trailerLink + ", " + trailerPic + ", " + rating;
+        String temp = title + ", " + status + ", " + trailerLink + ", " + trailerPic + ", " + rating + ", " + genre;
         return temp;
     } // toString
 
