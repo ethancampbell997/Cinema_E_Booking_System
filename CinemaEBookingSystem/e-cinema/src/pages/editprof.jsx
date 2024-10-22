@@ -11,12 +11,18 @@ export function EditProf() {
     city: '',
     state: '',
     zip: '',
-    promotion: false
+    promotion: false,
+    paymentCards: [
+      { type: '', number: '', expiration: '', cvc: '' },
+      { type: '', number: '', expiration: '', cvc: '' },
+      { type: '', number: '', expiration: '', cvc: '' },
+      { type: '', number: '', expiration: '', cvc: '' },
+    ]
   });
 
   useEffect(() => {
     const userEmail = sessionStorage.getItem('userEmail');
-  
+
     fetch('http://localhost:8080/api/users/profile', {
       method: 'POST',
       headers: {
@@ -26,14 +32,21 @@ export function EditProf() {
     })
       .then(response => response.json())
       .then(data => {
-        setUserData({
+        setUserData(prevState => ({
+          ...prevState,
           name: data.name || '',
           street: data.street || '',
           city: data.city || '',
           state: data.state || '',
           zip: data.zip || '',
-          promotion: data.promotion || false
-        });
+          promotion: data.promotion || false,
+          paymentCards: data.paymentCards || [
+            { type: '', number: '', expiration: '', cvc: '' },
+            { type: '', number: '', expiration: '', cvc: '' },
+            { type: '', number: '', expiration: '', cvc: '' },
+            { type: '', number: '', expiration: '', cvc: '' },
+          ]
+        }));
       })
       .catch(error => console.error('Error fetching user data:', error));
   }, []);
@@ -47,44 +60,44 @@ export function EditProf() {
     setUserData(prevState => ({ ...prevState, promotion: e.target.checked }));
   };
 
+  const handleCardChange = (index, e) => {
+    const { id, value } = e.target;
+    const newCards = [...userData.paymentCards];
+    newCards[index] = { ...newCards[index], [id]: value };
+    setUserData(prevState => ({ ...prevState, paymentCards: newCards }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Submitting user data:', userData);
     const userEmail = sessionStorage.getItem('userEmail');
     fetch('http://localhost:8080/api/users/edit', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "name": userData.name,
-          "street": userData.street,
-          "city": userData.city,
-          "state": userData.state,
-          "zip": userData.zip,
-          "promotion": userData.promotion,
-          "email": userEmail
-        }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...userData,
+        email: userEmail
+      }),
     })
-    .then(response => {
+      .then(response => {
         console.log('Response status:', response.status);
-        navigate('/'); 
+        navigate('/');
         return response.text();
-        
-    })
-    .then(text => {
+      })
+      .then(text => {
         try {
-            const data = JSON.parse(text);
-            console.log('Success:', data);
+          const data = JSON.parse(text);
+          console.log('Success:', data);
         } catch (error) {
-            console.error('Failed to parse JSON:', text);
+          console.error('Failed to parse JSON:', text);
         }
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         console.error('Error:', error);
-    });
-};
+      });
+  };
 
   return (
     <>
@@ -94,6 +107,29 @@ export function EditProf() {
           <label htmlFor="name">Name: </label>
           <input type="text" id="name" value={userData.name} onChange={handleInputChange} /><br />
 
+          <h4>Payment Info</h4>
+          {userData.paymentCards.map((card, index) => (
+            <div key={index}>
+              <p>Card {index + 1}</p>
+              <label htmlFor={`payment-${index}`}>Card Type: </label>
+              <select id={`payment-${index}`} value={card.type} onChange={(e) => handleCardChange(index, e)}>
+                <option value="" disabled hidden>Select Card Type</option>
+                <option value="Visa">Visa</option>
+                <option value="MasterCard">MasterCard</option>
+                <option value="Discover">Discover</option>
+                <option value="American Express">American Express</option>
+              </select><br />
+
+              <label htmlFor={`cardNumber-${index}`}>Card Number: </label>
+              <input type="text" id={`cardNumber-${index}`} value={card.number} onChange={(e) => handleCardChange(index, e)} placeholder="Card number" /><br />
+
+              <label htmlFor={`expiration-${index}`}>Expiration Date: </label>
+              <input type="text" id={`expiration-${index}`} value={card.expiration} onChange={(e) => handleCardChange(index, e)} placeholder="12/2024" pattern="[0-1][0-9]/[0-9]{4}" /><br />
+
+              <label htmlFor={`cvc-${index}`}>CVC: </label>
+              <input type="text" id={`cvc-${index}`} value={card.cvc} onChange={(e) => handleCardChange(index, e)} placeholder="123" /><br />
+            </div>
+          ))}
 
           <h4>Address</h4>
           <label htmlFor="street">Street: </label>
