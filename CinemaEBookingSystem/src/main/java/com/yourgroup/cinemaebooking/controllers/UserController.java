@@ -23,19 +23,33 @@ public class UserController {
   private EmailSenderService emailSenderService;
 
   @PostMapping()
-  public void createUser(@RequestBody NewUser user) {
+  public ResponseEntity<Map<String, String>> createUser(@RequestBody NewUser user) {
     System.out.println("here2");
-    user.hashPassword();
-    user.fixDate();
-    user.encryptCard();
-    UserAccess.saveUser(user);
-    try {
-      String userEmail = user.getEmail();
-      emailSenderService.sendEmail(userEmail, "New User Created", "You have created a new account with e-cinema!");
-      System.out.println("Email sent successfully");
-    } catch (Exception e) {
-      System.err.println("Failed to send email: " + e.getMessage());
-      e.printStackTrace();
+    Map<String, String> response = new HashMap<>();
+    int checkEmail = UserAccess.checkForEmail(user.getEmail());
+    if (checkEmail == 0) {
+        user.hashPassword();
+        user.fixDate();
+        user.encryptCard();
+        UserAccess.saveUser(user);
+        try {
+            String userEmail = user.getEmail();
+            emailSenderService.sendEmail(userEmail, "New User Created", "You have created a new account with e-cinema!");
+            System.out.println("Email sent successfully");
+            response.put("message", "User created successfully");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            System.err.println("Failed to send email: " + e.getMessage());
+            e.printStackTrace();
+            response.put("message", "Failed to send email: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    } else if (checkEmail == 1) {
+        response.put("message", "Email already exists. Try again.");
+        return ResponseEntity.status(401).body(response);
+    } else {
+        response.put("message", "Error");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
   }
 
