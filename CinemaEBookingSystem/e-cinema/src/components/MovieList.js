@@ -18,6 +18,10 @@ const MovieList = ({ title, movies = [], loading }) => {
     setSelectedTrailer(null);
   };
 
+  const generateIdFromTitle = (title) => {
+    return title.toLowerCase().replace(/\s+/g, '-'); 
+  };
+
   return (
     <section className="movie-list">
       <h2>{title}</h2>
@@ -27,7 +31,7 @@ const MovieList = ({ title, movies = [], loading }) => {
         ) : movies.length > 0 ? (
           movies.map((movie, index) => (
             <div className="movie-card" key={index}>
-              <Link to={`/movie/${movie.id}`} style={{ textDecoration: 'none' }}>
+              <Link to={`/movie/${generateIdFromTitle(movie.title)}`} style={{ textDecoration: 'none' }}>
                 <div className="poster-title">
                   <div className="poster-container">
                     <img

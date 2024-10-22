@@ -4,10 +4,13 @@ import './HeroSection.css';
 import { Link } from "react-router-dom";
 
 const MovieDetail = ({ movies }) => {
-  const { id } = useParams();
-  const movie = movies.find((movie) => movie.id === id || movie.id === parseInt(id, 10)); 
+  const { title } = useParams();
   const heroRef = useRef(null);
   const [showTrailer, setShowTrailer] = useState(false);
+
+  const movie = movies.find((movie) => 
+    movie.title.toLowerCase().replace(/\s+/g, '-') === title
+  );
 
   const handleWatchTrailer = () => {
     setShowTrailer(true);

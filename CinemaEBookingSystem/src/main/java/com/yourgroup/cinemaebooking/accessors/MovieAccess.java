@@ -189,7 +189,7 @@ public class MovieAccess {
 
     public static String getGenre(int id) {
         /* Pre: Movie exists */
-        String sql = "select rating from movies where movie_id=" + Integer.toString(id);
+        String sql = "select genre from movies where movie_id=" + Integer.toString(id);
         Statement st = null;
         ResultSet rs = null;
 

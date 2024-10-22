@@ -71,7 +71,7 @@ function App() {
               } />
                 <Route path="/movies" element={<MoviesPage moviesNowPlaying={moviesNowPlaying} />} />
                 <Route path="/results/:searchTerm" element={<ResultsPage />} />
-                <Route path="/movie/:id" element={<MovieDetail movies={allMovies} />} />
+                <Route path="/movie/:title" element={<MovieDetail movies={allMovies} />} />
                 <Route path="/" element={<Home/>}/>
               <Route path="/createaccount" element={<CreateAccount/>}/>
               <Route path="/login" element={<LogIn setIsLoggedIn={setIsLoggedIn} />}/>
