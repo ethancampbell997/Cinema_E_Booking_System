@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yourgroup.cinemaebooking.PaymentCard;
+import com.yourgroup.cinemaebooking.utilities.CardUtility;
 
 public class CardAccess {
     private static String url = "jdbc:mysql://cinema-booking.cfysagqmu79l.us-east-2.rds.amazonaws.com:3306/cinema_booking";
@@ -74,6 +75,9 @@ public class CardAccess {
                 card.setCardType(rs.getString("card_type"));
                 card.setCardNumber(rs.getString("card_number"));
                 card.setExpirationDate(rs.getString("expiration_date"));
+                String encryptedCardNumber = rs.getString("card_number");
+                String decryptedCardNumber = CardUtility.decryptCreditCard(encryptedCardNumber);
+                card.setCardNumber(decryptedCardNumber);
                 // Avoid fetching sensitive data like CVC
                 cards.add(card);
             }

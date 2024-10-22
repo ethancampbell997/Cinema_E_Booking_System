@@ -46,16 +46,16 @@ export function EditProf() {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data && data.length) {
-          setCardData(
-            data.map((card) => ({
-              cardType: card.cardType || "",
-              cardNumber: card.cardNumber || "",
-              expiration: card.expirationDate || "",
-              cvc: "", // Initialize CVC as empty (not displayed)
-            }))
-          );
-        }
+        const formattedCards = (data || []).map((card) => ({
+          cardType: card.cardType || "",
+          cardNumber: card.cardNumber || "",
+          expiration: card.expirationDate || "",
+          cvc: "", // Initialize CVC as empty (not displayed)
+        }));
+
+        // Ensure we always have 4 cards
+        const cardsToDisplay = [...formattedCards, {}, {}, {}, {}].slice(0, 4);
+        setCardData(cardsToDisplay);
       })
       .catch((error) => console.error("Error fetching card data:", error));
   }, []);
@@ -72,7 +72,10 @@ export function EditProf() {
   const handleCardInputChange = (index, field, value) => {
     setCardData((prevCardData) => {
       const updatedCards = [...prevCardData];
-      updatedCards[index][field] = value;
+      updatedCards[index] = {
+        ...updatedCards[index],
+        [field]: value,
+      };
       return updatedCards;
     });
   };
@@ -131,59 +134,62 @@ export function EditProf() {
 
           <h4>Payment Info</h4>
           <div className="allCards">
-            {cardData.map((card, index) => (
-              <div key={index} className={`card${index + 1}`}>
-                <p>Card {index + 1}</p>
-                <label>Card Type: </label>
-                <select
-                  id="payment"
-                  value={card.cardType}
-                  onChange={(e) =>
-                    handleCardInputChange(index, "cardType", e.target.value)
-                  }
-                >
-                  <option value="" disabled>
-                    Select Card Type
-                  </option>
-                  <option value="Visa">Visa</option>
-                  <option value="MasterCard">MasterCard</option>
-                  <option value="Discover">Discover</option>
-                  <option value="American Express">American Express</option>
-                </select>
-                <br />
+            {Array.from({ length: 4 }, (_, index) => {
+              const card = cardData[index] || {};
+              return (
+                <div key={index} className={`card${index + 1}`}>
+                  <p>Card {index + 1}</p>
+                  <label>Card Type: </label>
+                  <select
+                    id="payment"
+                    value={card.cardType || ""}
+                    onChange={(e) =>
+                      handleCardInputChange(index, "cardType", e.target.value)
+                    }
+                  >
+                    <option value="" disabled>
+                      Select Card Type
+                    </option>
+                    <option value="Visa">Visa</option>
+                    <option value="MasterCard">MasterCard</option>
+                    <option value="Discover">Discover</option>
+                    <option value="American Express">American Express</option>
+                  </select>
+                  <br />
 
-                <label>Card Number: </label>
-                <input
-                  type="text"
-                  value={card.cardNumber}
-                  onChange={(e) =>
-                    handleCardInputChange(index, "cardNumber", e.target.value)
-                  }
-                />
-                <br />
+                  <label>Card Number: </label>
+                  <input
+                    type="text"
+                    value={card.cardNumber || ""}
+                    onChange={(e) =>
+                      handleCardInputChange(index, "cardNumber", e.target.value)
+                    }
+                  />
+                  <br />
 
-                <label>Expiration Date: </label>
-                <input
-                  type="text"
-                  value={card.expiration}
-                  onChange={(e) =>
-                    handleCardInputChange(index, "expiration", e.target.value)
-                  }
-                  placeholder="12/2024"
-                />
-                <br />
+                  <label>Expiration Date: </label>
+                  <input
+                    type="text"
+                    value={card.expiration || ""}
+                    onChange={(e) =>
+                      handleCardInputChange(index, "expiration", e.target.value)
+                    }
+                    placeholder="12/2024"
+                  />
+                  <br />
 
-                <label>CVC: </label>
-                <input
-                  type="text"
-                  value={card.cvc}
-                  onChange={(e) =>
-                    handleCardInputChange(index, "cvc", e.target.value)
-                  }
-                />
-                <br />
-              </div>
-            ))}
+                  <label>CVC: </label>
+                  <input
+                    type="text"
+                    value={card.cvc || ""}
+                    onChange={(e) =>
+                      handleCardInputChange(index, "cvc", e.target.value)
+                    }
+                  />
+                  <br />
+                </div>
+              );
+            })}
           </div>
 
           <h4>Address</h4>
