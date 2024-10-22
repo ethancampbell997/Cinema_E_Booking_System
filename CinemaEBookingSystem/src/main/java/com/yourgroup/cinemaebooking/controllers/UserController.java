@@ -1,12 +1,11 @@
 package com.yourgroup.cinemaebooking.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import com.yourgroup.cinemaebooking.EmailSenderService;
 import com.yourgroup.cinemaebooking.LoggedInUser;
 import com.yourgroup.cinemaebooking.PasswordResetRequest;
+import com.yourgroup.cinemaebooking.PaymentCard;
 import com.yourgroup.cinemaebooking.utilities.PasswordUtility;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.yourgroup.cinemaebooking.NewUser;
+import com.yourgroup.cinemaebooking.accessors.CardAccess;
 import com.yourgroup.cinemaebooking.accessors.UserAccess;
 
 @RestController
@@ -203,5 +203,16 @@ public class UserController {
         }
         return false;
     } // validateUser
+    @PostMapping("/cards")
+    public ResponseEntity<List<PaymentCard>> getCards(@RequestBody Map<String, String> payload) {
+        String email = payload.get("email");
+        List<PaymentCard> cards = CardAccess.getCardsByEmail(email);
+        
+        if (cards != null) {
+            return ResponseEntity.ok(cards);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+        }
+    }
 }
 

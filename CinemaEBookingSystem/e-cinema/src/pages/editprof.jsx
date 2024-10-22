@@ -1,101 +1,117 @@
 import "../styles.css";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function EditProf() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
-    name: '',
-    street: '',
-    city: '',
-    state: '',
-    zip: '',
+    name: "",
+    street: "",
+    city: "",
+    state: "",
+    zip: "",
     promotion: false,
-    paymentCards: [
-      { type: '', number: '', expiration: '', cvc: '' },
-      { type: '', number: '', expiration: '', cvc: '' },
-      { type: '', number: '', expiration: '', cvc: '' },
-      { type: '', number: '', expiration: '', cvc: '' },
-    ]
   });
 
-  useEffect(() => {
-    const userEmail = sessionStorage.getItem('userEmail');
+  const [cardData, setCardData] = useState([]);
 
-    fetch('http://localhost:8080/api/users/profile', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  useEffect(() => {
+    const userEmail = sessionStorage.getItem("userEmail");
+
+    // Fetch user profile
+    fetch("http://localhost:8080/api/users/profile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: userEmail }),
     })
-      .then(response => response.json())
-      .then(data => {
-        setUserData(prevState => ({
-          ...prevState,
-          name: data.name || '',
-          street: data.street || '',
-          city: data.city || '',
-          state: data.state || '',
-          zip: data.zip || '',
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData({
+          name: data.name || "",
+          street: data.street || "",
+          city: data.city || "",
+          state: data.state || "",
+          zip: data.zip || "",
           promotion: data.promotion || false,
-          paymentCards: data.paymentCards || [
-            { type: '', number: '', expiration: '', cvc: '' },
-            { type: '', number: '', expiration: '', cvc: '' },
-            { type: '', number: '', expiration: '', cvc: '' },
-            { type: '', number: '', expiration: '', cvc: '' },
-          ]
-        }));
+        });
       })
-      .catch(error => console.error('Error fetching user data:', error));
+      .catch((error) => console.error("Error fetching user data:", error));
+
+    // Fetch payment cards
+    fetch("http://localhost:8080/api/users/cards", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: userEmail }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.length) {
+          setCardData(
+            data.map((card) => ({
+              cardType: card.cardType || "",
+              cardNumber: card.cardNumber || "",
+              expiration: card.expirationDate || "",
+              cvc: "", // Initialize CVC as empty (not displayed)
+            }))
+          );
+        }
+      })
+      .catch((error) => console.error("Error fetching card data:", error));
   }, []);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    setUserData(prevState => ({ ...prevState, [id]: value }));
+    setUserData((prevState) => ({ ...prevState, [id]: value }));
   };
 
   const handleCheckboxChange = (e) => {
-    setUserData(prevState => ({ ...prevState, promotion: e.target.checked }));
+    setUserData((prevState) => ({ ...prevState, promotion: e.target.checked }));
   };
 
-  const handleCardChange = (index, e) => {
-    const { id, value } = e.target;
-    const newCards = [...userData.paymentCards];
-    newCards[index] = { ...newCards[index], [id]: value };
-    setUserData(prevState => ({ ...prevState, paymentCards: newCards }));
+  const handleCardInputChange = (index, field, value) => {
+    setCardData((prevCardData) => {
+      const updatedCards = [...prevCardData];
+      updatedCards[index][field] = value;
+      return updatedCards;
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitting user data:', userData);
-    const userEmail = sessionStorage.getItem('userEmail');
-    fetch('http://localhost:8080/api/users/edit', {
-      method: 'POST',
+    console.log("Submitting user data:", userData);
+    const userEmail = sessionStorage.getItem("userEmail");
+    fetch("http://localhost:8080/api/users/edit", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        ...userData,
-        email: userEmail
+        name: userData.name,
+        street: userData.street,
+        city: userData.city,
+        state: userData.state,
+        zip: userData.zip,
+        promotion: userData.promotion,
+        email: userEmail,
+        cards: cardData, // Include the card data in the submission
       }),
     })
-      .then(response => {
-        console.log('Response status:', response.status);
-        navigate('/');
-        return response.text();
+      .then((response) => {
+        console.log("Response status:", response.status);
+        navigate("/");
+        return response.text(); // Get the response as text
       })
-      .then(text => {
+      .then((text) => {
         try {
-          const data = JSON.parse(text);
-          console.log('Success:', data);
+          const data = JSON.parse(text); // Try to parse the text as JSON
+          console.log("Success:", data);
         } catch (error) {
-          console.error('Failed to parse JSON:', text);
+          console.error("Failed to parse JSON:", text); // Log the response text
         }
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
@@ -105,44 +121,114 @@ export function EditProf() {
         <h1 className="below">Edit Profile</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Name: </label>
-          <input type="text" id="name" value={userData.name} onChange={handleInputChange} /><br />
+          <input
+            type="text"
+            id="name"
+            value={userData.name}
+            onChange={handleInputChange}
+          />
+          <br />
 
           <h4>Payment Info</h4>
-          {userData.paymentCards.map((card, index) => (
-            <div key={index}>
-              <p>Card {index + 1}</p>
-              <label htmlFor={`payment-${index}`}>Card Type: </label>
-              <select id={`payment-${index}`} value={card.type} onChange={(e) => handleCardChange(index, e)}>
-                <option value="" disabled hidden>Select Card Type</option>
-                <option value="Visa">Visa</option>
-                <option value="MasterCard">MasterCard</option>
-                <option value="Discover">Discover</option>
-                <option value="American Express">American Express</option>
-              </select><br />
+          <div className="allCards">
+            {cardData.map((card, index) => (
+              <div key={index} className={`card${index + 1}`}>
+                <p>Card {index + 1}</p>
+                <label>Card Type: </label>
+                <select
+                  id="payment"
+                  value={card.cardType}
+                  onChange={(e) =>
+                    handleCardInputChange(index, "cardType", e.target.value)
+                  }
+                >
+                  <option value="" disabled>
+                    Select Card Type
+                  </option>
+                  <option value="Visa">Visa</option>
+                  <option value="MasterCard">MasterCard</option>
+                  <option value="Discover">Discover</option>
+                  <option value="American Express">American Express</option>
+                </select>
+                <br />
 
-              <label htmlFor={`cardNumber-${index}`}>Card Number: </label>
-              <input type="text" id={`cardNumber-${index}`} value={card.number} onChange={(e) => handleCardChange(index, e)} placeholder="Card number" /><br />
+                <label>Card Number: </label>
+                <input
+                  type="text"
+                  value={card.cardNumber}
+                  onChange={(e) =>
+                    handleCardInputChange(index, "cardNumber", e.target.value)
+                  }
+                />
+                <br />
 
-              <label htmlFor={`expiration-${index}`}>Expiration Date: </label>
-              <input type="text" id={`expiration-${index}`} value={card.expiration} onChange={(e) => handleCardChange(index, e)} placeholder="12/2024" pattern="[0-1][0-9]/[0-9]{4}" /><br />
+                <label>Expiration Date: </label>
+                <input
+                  type="text"
+                  value={card.expiration}
+                  onChange={(e) =>
+                    handleCardInputChange(index, "expiration", e.target.value)
+                  }
+                  placeholder="12/2024"
+                />
+                <br />
 
-              <label htmlFor={`cvc-${index}`}>CVC: </label>
-              <input type="text" id={`cvc-${index}`} value={card.cvc} onChange={(e) => handleCardChange(index, e)} placeholder="123" /><br />
-            </div>
-          ))}
+                <label>CVC: </label>
+                <input
+                  type="text"
+                  value={card.cvc}
+                  onChange={(e) =>
+                    handleCardInputChange(index, "cvc", e.target.value)
+                  }
+                />
+                <br />
+              </div>
+            ))}
+          </div>
 
           <h4>Address</h4>
           <label htmlFor="street">Street: </label>
-          <input type="text" id="street" value={userData.street} onChange={handleInputChange} /><br />
+          <input
+            type="text"
+            id="street"
+            value={userData.street}
+            onChange={handleInputChange}
+          />
+          <br />
           <label htmlFor="city">City: </label>
-          <input type="text" id="city" value={userData.city} onChange={handleInputChange} /><br />
+          <input
+            type="text"
+            id="city"
+            value={userData.city}
+            onChange={handleInputChange}
+          />
+          <br />
           <label htmlFor="state">State: </label>
-          <input type="text" id="state" value={userData.state} onChange={handleInputChange} /><br />
+          <input
+            type="text"
+            id="state"
+            value={userData.state}
+            onChange={handleInputChange}
+          />
+          <br />
           <label htmlFor="zip">Zip Code: </label>
-          <input type="text" id="zip" value={userData.zip} onChange={handleInputChange} /><br /><br />
+          <input
+            type="text"
+            id="zip"
+            value={userData.zip}
+            onChange={handleInputChange}
+          />
+          <br />
+          <br />
 
           <label htmlFor="promotion">Register for Promotions</label>
-          <input type="checkbox" id="promotion" checked={userData.promotion} onChange={handleCheckboxChange} /><br />
+          <input
+            type="checkbox"
+            id="promotion"
+            checked={userData.promotion}
+            onChange={handleCheckboxChange}
+          />
+          <br />
 
           <input className="FinishButton" type="submit" value="Submit" />
         </form>
